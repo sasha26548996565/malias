@@ -1,77 +1,168 @@
-@extends('layouts.app')
+@extends('layouts.master')
+
+@section('title', 'auth')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+    <section class="page-content">
+        <!-- Start Account-Create-Area -->
+        <div class="account-create-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="page-menu">
+                            <li><a href="{{ route('index') }}">Home</a></li>
+                            <li class="active"><a href="account.html">Account</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="area-title">
+                            <h3 class="title-group gfont-1">Create an Account</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="account-create">
+                    <form action="{{ route('register') }}" method="POST">
                         @csrf
-
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="account-create-box">
+                                    <h2 class="box-info">Personal Information</h2>
+                                    <div class="row">
+                                        <div class="col-sm-4 col-xs-12">
+                                            <div class="single-create">
+                                                <p>First Name <sup>*</sup></p>
+                                                <input class="form-control" type="text" name="name"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-xs-12">
+                                            <div class="single-create">
+                                                <p>Last Name <sup>*</sup></p>
+                                                <input class="form-control" type="text" name="last_name"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-xs-12">
+                                            <div class="single-create">
+                                                <p>Email Address <sup>*</sup></p>
+                                                <input class="form-control" type="email" name="email"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="single-create">
+                                                <p>Password <sup>*</sup></p>
+                                                <input class="form-control" type="password" name="password"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="single-create">
+                                                <p>Confirm Password <sup>*</sup></p>
+                                                <input class="form-control" type="password" name="password_confirmation"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="submit-area">
+                                    <p class="required text-right">* Required Fields</p>
+                                    <button type="submit" class="btn btn-primary floatright">submit</button>
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+        <!-- End Account-Create-Area -->
+        <!-- START BRAND-LOGO-AREA -->
+        <div class="brand-logo-area carosel-navigation">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="area-title">
+                            <h3 class="title-group border-red gfont-1">Brand Logo</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="active-brand-logo">
+                        <div class="col-md-2">
+                            <div class="single-brand-logo">
+                                <a href="#"><img src="img/brand/1.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="single-brand-logo">
+                                <a href="#"><img src="img/brand/2.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="single-brand-logo">
+                                <a href="#"><img src="img/brand/3.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="single-brand-logo">
+                                <a href="#"><img src="img/brand/4.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="single-brand-logo">
+                                <a href="#"><img src="img/brand/5.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="single-brand-logo">
+                                <a href="#"><img src="img/brand/6.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="single-brand-logo">
+                                <a href="#"><img src="img/brand/1.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="single-brand-logo">
+                                <a href="#"><img src="img/brand/2.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="single-brand-logo">
+                                <a href="#"><img src="img/brand/3.png" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END BRAND-LOGO-AREA -->
+        <!-- START SUBSCRIBE-AREA -->
+        <div class="subscribe-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-sm-7 col-xs-12">
+                        <label class="hidden-sm hidden-xs">Sign Up for Our Newsletter:</label>
+                        <div class="subscribe">
+                            <form action="#">
+                                <input type="text" placeholder="Enter Your E-mail">
+                                <button type="submit">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-5 col-xs-12">
+                        <div class="social-media">
+                            <a href="#"><i class="fa fa-facebook fb"></i></a>
+                            <a href="#"><i class="fa fa-google-plus gp"></i></a>
+                            <a href="#"><i class="fa fa-twitter tt"></i></a>
+                            <a href="#"><i class="fa fa-youtube yt"></i></a>
+                            <a href="#"><i class="fa fa-linkedin li"></i></a>
+                            <a href="#"><i class="fa fa-rss rs"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END SUBSCRIBE-AREA -->
+    </section>
+
 @endsection

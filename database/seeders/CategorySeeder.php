@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\DB;
 class CategorySeeder extends Seeder
 {
     private array $categories = [
-        ['name' => 'TV & Audio', 'slug' => 'TV-&-Audio'],
-        ['name' => 'cameras', 'slug' => 'cameras'],
-        ['name' => 'Smart phones', 'slug' => 'smart-phones'],
+        ['name' => 'TV & Audio', 'slug' => 'TV-&-Audio', 'parent_id' => null],
+        ['name' => 'cameras', 'slug' => 'cameras', 'parent_id' => null],
+        ['name' => 'Smart phones', 'slug' => 'smart-phones', 'parent_id' => null],
     ];
 
     public function run(): void

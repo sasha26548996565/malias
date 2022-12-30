@@ -35,7 +35,11 @@
                             <li><a href="my-account.html"><i class="fa fa-user"></i> My Account</a></li>
                             <li><a href="wishlist.html"><i class="fa fa-heart"></i> Wish List (0)</a></li>
                             <li><a href="checkout.html"><i class="fa fa-share"></i> Checkout</a></li>
-                            <li><a href="account.html"><i class="fa fa-unlock-alt"></i> Login</a></li>
+                            @auth
+                                <li><a href="{{ route('logout') }}"><i class="fa fa-unlock-alt"></i> logout</a></li>
+                            @else
+                            <li><a href="{{ route('login') }}"><i class="fa fa-unlock-alt"></i> Login</a></li>
+                            @endauth
                         </ul>
                     </div>
                     <!-- End Top-Link -->
@@ -223,7 +227,9 @@
                                     <ul>
                                         <li><a href="cart.html">Cart</a></li>
                                         <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="account.html">Create Account</a></li>
+                                        @guest
+                                            <li><a href="{{ route('register') }}">Create Account</a></li>
+                                        @endguest
                                         <li><a href="my-account.html">My Account</a></li>
                                         <li><a href="product-details.html">Product details</a></li>
                                         <li><a href="shop.html">Shop Grid View</a></li>
