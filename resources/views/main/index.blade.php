@@ -17,76 +17,32 @@
                         <div class="row">
                             <div class="active-hot-deals">
                                 <!-- Start Single-hot-deals -->
-                                <div class="col-xs-12">
-                                    <div class="single-hot-deals">
-                                        <div class="hot-deals-photo">
-                                            <a href="#"><img src="{{ asset('img/hot-deals/1.jpg') }}" alt="Product"></a>
-                                        </div>
-                                        <div class="count-down">
-                                            <div class="timer">
-                                                <div data-countdown="2017/12/31"></div>
+                                @foreach ($hotDealProducts as $product)
+                                    <div class="col-xs-12">
+                                        <div class="single-hot-deals">
+                                            <div class="hot-deals-photo">
+                                                <a href="#"><img src="{{ Storage::url($product->preview) }}" alt="{{ $product->name }}"></a>
                                             </div>
-                                        </div>
-                                        <div class="hot-deals-text">
-                                            <h5><a href="#" class="name-group">Various Versions</a></h5>
-                                            <span class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                    class="fa fa-star-o"></i></span>
-                                            <div class="price-box">
-                                                <span class="price gfont-2">$99.00</span>
-                                                <span class="old-price gfont-2">$110.00</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Single-hot-deals -->
-                                <!-- Start Single-hot-deals -->
-                                <div class="col-xs-12">
-                                    <div class="single-hot-deals">
-                                        <div class="hot-deals-photo">
-                                            <a href="#"><img src="{{ asset('img/hot-deals/2.jpg') }}" alt="Product"></a>
-                                        </div>
-                                        <div class="count-down">
-                                            <div class="timer">
-                                                <div data-countdown="2017/06/30"></div>
-                                            </div>
-                                        </div>
-                                        <div class="hot-deals-text">
-                                            <h5><a href="#" class="name-group">Trid Palm</a></h5>
-                                            <span class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                    class="fa fa-star-o"></i></span>
-                                            <div class="price-box">
-                                                <span class="price gfont-2">$85.00</span>
-                                                <span class="old-price gfont-2">$120.00</span>
+                                            {{-- <div class="count-down">
+                                                <div class="timer">
+                                                    <div data-countdown="2017/12/31"></div>
+                                                </div>
+                                            </div> --}}
+                                            <div class="hot-deals-text">
+                                                <h5><a href="#" class="name-group">Various Versions</a></h5>
+                                                <span class="rating">
+                                                    @for ($i = 0; $i < $product->rate; $i++)
+                                                        <i class="fa fa-star"></i>
+                                                    @endfor
+                                                </span>
+                                                <div class="price-box">
+                                                    <span class="price gfont-2">{{ $product->getPriceWithDiscount() }}$</span>
+                                                    <span class="old-price gfont-2">{{ $product->price / 100 }}$</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- End Single-hot-deals -->
-                                <!-- Start Single-hot-deals -->
-                                <div class="col-xs-12">
-                                    <div class="single-hot-deals">
-                                        <div class="hot-deals-photo">
-                                            <a href="#"><img src="{{ asset('img/hot-deals/3.jpg') }}" alt="Product"></a>
-                                        </div>
-                                        <div class="count-down">
-                                            <div class="timer">
-                                                <div data-countdown="2017/08/30"></div>
-                                            </div>
-                                        </div>
-                                        <div class="hot-deals-text">
-                                            <h5><a href="#" class="name-group">Established Fact</a></h5>
-                                            <span class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
-                                                    class="fa fa-star-o"></i></span>
-                                            <div class="price-box">
-                                                <span class="price gfont-2">$90.00</span>
-                                                <span class="old-price gfont-2">$105.00</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                                 <!-- End Single-hot-deals -->
                             </div>
                         </div>

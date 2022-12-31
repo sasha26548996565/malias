@@ -7,7 +7,7 @@ namespace App\ViewComposers;
 use App\Models\Category;
 use Illuminate\Contracts\View\View;
 
-class CategoryViewComposer implements ViewComposerContract
+class CategoryComposer implements ComposerContract
 {
     public function compose(View $view): View
     {

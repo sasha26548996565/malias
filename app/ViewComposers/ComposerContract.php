@@ -6,7 +6,7 @@ namespace App\ViewComposers;
 
 use Illuminate\Contracts\View\View;
 
-interface ViewComposerContract
+interface ComposerContract
 {
     public function compose(View $view): View;
 }

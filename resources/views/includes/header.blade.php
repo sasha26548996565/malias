@@ -116,22 +116,13 @@
                             <div class="search-container">
                                 <select>
                                     <option class="all-cate">All Categories</option>
-                                    <optgroup  class="cate-item-head" label="Cameras & Photography">
-                                        <option class="cate-item-title">Handbags</option>
-                                        <option class="c-item">Blouses And Shirts</option>
-                                        <option class="c-item">Clouthes</option>
-                                    </optgroup>
-                                    <optgroup  class="cate-item-head" label="Laptop & Computer">
-                                        <option class="cate-item-title">Apple</option>
-                                        <option class="c-item">Dell</option>
-                                        <option class="c-item">Hp</option>
-                                        <option class="c-item">Sony</option>
-                                    </optgroup>
-                                    <optgroup  class="cate-item-head" label="Electronic">
-                                        <option class="c-item">Mobile</option>
-                                        <option class="c-item">Speaker</option>
-                                        <option class="c-item">Headphone</option>
-                                    </optgroup>
+                                    @foreach ($categories->where('parent_id', null) as $category)
+                                        <optgroup  class="cate-item-head" label="{{ $category->name }}">
+                                            @foreach ($categories->where('parent_id', $category->id) as $childCategory)
+                                                <option class="cate-item">{{ $childCategory->name }}</option>
+                                            @endforeach
+                                        </optgroup>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="header-search">
@@ -213,12 +204,7 @@
                     <div class="mainmenu hidden-sm hidden-xs">
                         <nav>
                             <ul>
-                                <li><a href="index.html">Home</a>
-                                    <ul>
-                                        <li><a href="index.html">Home Versions 1</a></li>
-                                        <li><a href="index-2.html">Home Versions 2</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="{{ route('index') }}">Home</a></li>
                                 <li><a href="about.html">About Us</a></li>
                                 <li class="hot"><a href="shop.html">Bestseller Products</a></li>
                                 <li class="new"><a href="shop-list.html">New Products</a></li>
@@ -253,12 +239,7 @@
                 <div class="col-xs-12">
                     <nav id="mobile-menu">
                         <ul>
-                            <li><a href="index.html">Home</a>
-                                <ul>
-                                    <li><a href="index.html">Home Page 1</a></li>
-                                    <li><a href="index-2.html">Home Page 2</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="{{ route('index') }}">Home</a></li>
                             <li><a href="about.html">About Us</a></li>
                             <li><a href="shop.html">Bestseller Products</a></li>
                             <li><a href="shop-list.html">New Products</a></li>
@@ -266,8 +247,8 @@
                                 <ul>
                                     <li><a href="cart.html">Cart</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="account.html">Create Account</a></li>
-                                    <li><a href="login.html">Login</a></li>
+                                    <li><a href="{{ route('register') }}">Create Account</a></li>
+                                    <li><a href="{{ route('login') }}">Login</a></li>
                                     <li><a href="my-account.html">My Account</a></li>
                                     <li><a href="product-details.html">Product details</a></li>
                                     <li><a href="shop.html">Shop Grid View</a></li>

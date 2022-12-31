@@ -32,7 +32,7 @@
                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                     <div class="single-create">
                                         <p>Password <sup>*</sup></p>
-                                        <input class="form-control" type="password" name="firstname"/>
+                                        <input class="form-control" type="password" name="password"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-4 col-xs-12">
