@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -35,10 +36,15 @@ class Product extends Model
     public function getPriceWithDiscount(): float
     {
         if ($this->discount == null)
-            return 0;
+            return $this->price / 100;
 
-        $totalPriceInWhole = $this->price * (100 - $this->discount) / 100;
-        $totalPriceInCent = $totalPriceInWhole / 100;
-        return $totalPriceInCent;
+        $totalPriceInCent = $this->price * (100 - $this->discount) / 100;
+        $totalPriceInWhole = $totalPriceInCent / 100;
+        return $totalPriceInWhole;
+    }
+
+    public function issetDiscount(): bool
+    {
+        return $this->discount ? true : false;
     }
 }

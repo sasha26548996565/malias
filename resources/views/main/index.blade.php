@@ -29,15 +29,19 @@
                                                 </div>
                                             </div> --}}
                                             <div class="hot-deals-text">
-                                                <h5><a href="#" class="name-group">Various Versions</a></h5>
+                                                <h5><a href="#" class="name-group">{{ $product->name }}</a></h5>
                                                 <span class="rating">
                                                     @for ($i = 0; $i < $product->rate; $i++)
                                                         <i class="fa fa-star"></i>
                                                     @endfor
                                                 </span>
                                                 <div class="price-box">
-                                                    <span class="price gfont-2">{{ $product->getPriceWithDiscount() }}$</span>
-                                                    <span class="old-price gfont-2">{{ $product->price / 100 }}$</span>
+                                                    @if ($product->issetDiscount())
+                                                        <span class="price gfont-2">{{ $product->getPriceWithDiscount() }}$</span>
+                                                        <span class="old-price gfont-2">{{ $product->price / 100 }}$</span>
+                                                    @else
+                                                        <span class="price gfont-2">{{ $product->price / 100 }}$</span>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -60,75 +64,31 @@
                         <div class="row">
                             <div class="active-bestseller sidebar">
                                 <div class="col-xs-12">
-                                    <!-- Start Single-Product -->
-                                    <div class="single-product">
-                                        <div class="product-img">
-                                            <a href="#">
-                                                <img class="primary-img" src="{{ asset('img/product/small/1.jpg') }}" alt="Product">
-                                            </a>
-                                        </div>
-                                        <div class="product-description">
-                                            <h5><a href="#">Various Versions</a></h5>
-                                            <div class="price-box">
-                                                <span class="price">$99.00</span>
-                                                <span class="old-price">$120.00</span>
+                                    @foreach ($popularProducts as $product)
+                                        <div class="single-product">
+                                            <div class="product-img">
+                                                <a href="#">
+                                                    <img class="primary-img" src="{{ Storage::url($product->preview) }}" alt="Product">
+                                                </a>
                                             </div>
-                                            <span class="rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-o"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <!-- End Single-Product -->
-                                    <!-- Start Single-Product -->
-                                    <div class="single-product">
-                                        <div class="product-img">
-                                            <a href="#">
-                                                <img class="primary-img" src="{{ asset('img/product/small/2.jpg') }}" alt="Product">
-                                            </a>
-                                        </div>
-                                        <div class="product-description">
-                                            <h5><a href="#">Established Fact</a></h5>
-                                            <div class="price-box">
-                                                <span class="price">$85.00</span>
-                                                <span class="old-price">$105.00</span>
+                                            <div class="product-description">
+                                                <h5><a href="#">{{ $product->name }}</a></h5>
+                                                <div class="price-box">
+                                                    @if ($product->issetDiscount())
+                                                        <span class="price gfont-2">{{ $product->getPriceWithDiscount() }}$</span>
+                                                        <span class="old-price gfont-2">{{ $product->price / 100 }}$</span>
+                                                    @else
+                                                        <span class="price gfont-2">{{ $product->price / 100 }}$</span>
+                                                    @endif
+                                                </div>
+                                                <span class="rating">
+                                                    @for ($i = 0; $i < $product->rate; $i++)
+                                                        <i class="fa fa-star"></i>
+                                                    @endfor
+                                                </span>
                                             </div>
-                                            <span class="rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-o"></i>
-                                            </span>
                                         </div>
-                                    </div>
-                                    <!-- End Single-Product -->
-                                    <!-- Start Single-Product -->
-                                    <div class="single-product">
-                                        <div class="product-img">
-                                            <a href="#">
-                                                <img class="primary-img" src="{{ asset('img/product/small/3.jpg') }}" alt="Product">
-                                            </a>
-                                        </div>
-                                        <div class="product-description">
-                                            <h5><a href="#">Trid Palm</a></h5>
-                                            <div class="price-box">
-                                                <span class="price">$90.00</span>
-                                                <span class="old-price">$120.00</span>
-                                            </div>
-                                            <span class="rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-o"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <!-- End Single-Product -->
+                                    @endforeach
                                 </div>
                                 <div class="col-xs-12">
                                     <!-- Start Single-Product -->

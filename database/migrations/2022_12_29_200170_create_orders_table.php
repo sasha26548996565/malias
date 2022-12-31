@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('currency_id')->constrained()->onDelete('CASCADE');
             $table->foreignId('region_id')->constrained()->onDelete('CASCADE');
             $table->foreignId('country_id')->constrained()->onDelete('CASCADE');
-            $table->foreignId('promo_code_id')->constrained()->onDelete('CASCADE');
+            $table->foreignId('promo_code_id')->nullable()->constrained()->onDelete('CASCADE');
             $table->softDeletes();
             $table->timestamps();
         });

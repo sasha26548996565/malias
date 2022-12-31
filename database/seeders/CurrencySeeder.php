@@ -19,7 +19,7 @@ class CurrencySeeder extends Seeder
     {
         foreach ($this->currencies as $currency)
         {
-            DB::table('currency')->insert($currency);
+            DB::table('currencies')->insert($currency);
         }
     }
 }
