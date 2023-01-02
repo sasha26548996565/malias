@@ -9,6 +9,7 @@ use App\ViewComposers\CategoryComposer;
 use Illuminate\Support\ServiceProvider;
 use App\ViewComposers\HotDealProductComposer;
 use App\ViewComposers\PopularProductComposer;
+use App\ViewComposers\RecentProductsComposer;
 
 class ComposerServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,7 @@ class ComposerServiceProvider extends ServiceProvider
         View::composer('includes.categories', CategoryComposer::class);
         View::composer('includes.header', CategoryComposer::class);
         View::composer('main.index', HotDealProductComposer::class);
-        View::composer('main.index', PopularProductComposer::class);
+        View::composer('includes.bestsellers', PopularProductComposer::class);
+        View::composer('includes.recent_products', RecentProductsComposer::class);
     }
 }
