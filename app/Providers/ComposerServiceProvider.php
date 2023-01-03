@@ -17,6 +17,7 @@ class ComposerServiceProvider extends ServiceProvider
     {
         View::composer('includes.categories', CategoryComposer::class);
         View::composer('includes.header', CategoryComposer::class);
+        View::composer('main.index', CategoryComposer::class);
         View::composer('main.index', HotDealProductComposer::class);
         View::composer('includes.bestsellers', PopularProductComposer::class);
         View::composer('includes.recent_products', RecentProductsComposer::class);

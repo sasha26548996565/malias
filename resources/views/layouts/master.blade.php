@@ -31,9 +31,9 @@
 		@include('includes.header')
 		@include('includes.category_slider')
 
-		<!-- START PAGE-CONTENT -->
 		@yield('content')
-		<!-- END QUICKVIEW PRODUCT -->
+
+        @include('includes.footer')
 
         <script src="{{ asset('js/jquery-1.11.3.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>

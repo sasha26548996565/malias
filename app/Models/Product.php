@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
@@ -30,7 +31,17 @@ class Product extends Model
 
     public function images(): HasMany
     {
-        return $this->hasMany(Image::class, 'product_id', 'id');
+        return $this->hasMany(Images::class, 'product_id', 'id');
+    }
+
+    public function isSale(): bool
+    {
+        return $this->discount >= 10;
+    }
+
+    public function scopeSale(Builder $builder): Builder
+    {
+        return $builder->where('discount', '>=', 10);
     }
 
     public function getPriceWithDiscount(): float
