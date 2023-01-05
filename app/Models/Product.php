@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -42,6 +43,20 @@ class Product extends Model
     public function scopeSale(Builder $builder): Builder
     {
         return $builder->where('discount', '>=', 10);
+    }
+
+    public function wasPublishedRecently(): bool
+    {
+        if ($this->is_new && Carbon::now()->gte($this->created_at->addDays(5)))
+            return true;
+
+        return false;
+    }
+
+    public function disableIsNew(): void
+    {
+        $this->is_new = 0;
+        $this->save();
     }
 
     public function getPriceWithDiscount(): float
