@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -27,12 +27,12 @@
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     </head>
     <body>
-
 		@include('includes.header')
 		@include('includes.category_slider')
 
 		@yield('content')
 
+        @include('includes.subscribe_area')
         @include('includes.footer')
 
         <script src="{{ asset('js/jquery-1.11.3.min.js') }}"></script>
