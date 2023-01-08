@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="area-title">
-                                    <h3 class="title-group border-red gfont-1">Hot Deals</h3>
+                                    <h3 class="title-group border-red gfont-1">{{ __('index.hot_deals') }}</h3>
                                 </div>
                             </div>
                         </div>

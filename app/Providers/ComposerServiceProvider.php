@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\View;
 use App\ViewComposers\CategoryComposer;
+use App\ViewComposers\LanguageComposer;
 use Illuminate\Support\ServiceProvider;
 use App\ViewComposers\HotDealProductComposer;
 use App\ViewComposers\PopularProductComposer;
@@ -17,6 +18,7 @@ class ComposerServiceProvider extends ServiceProvider
     {
         View::composer('includes.categories', CategoryComposer::class);
         View::composer('includes.header', CategoryComposer::class);
+        View::composer('includes.header', LanguageComposer::class);
         View::composer('main.index', CategoryComposer::class);
         View::composer('main.index', HotDealProductComposer::class);
         View::composer('includes.bestsellers', PopularProductComposer::class);

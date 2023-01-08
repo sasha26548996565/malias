@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>@yield('title', 'Malias')</title>
-        <meta name="description" content="">
+        <title>@yield('title', __('index.title'))</title>
+        <meta name="description" content="Shop">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
 
@@ -25,6 +25,8 @@
         <link rel="stylesheet" href="{{ asset('css/main.css') }}">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+
+        @yield('custom_css')
     </head>
     <body>
 		@include('includes.header')
@@ -46,5 +48,7 @@
 		<script src="{{ asset('js/jquery.nivo.slider.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/plugins.js') }}"></script>
         <script src="{{ asset('js/main.js') }}"></script>
+
+        @yield('custom_javascript')
     </body>
 </html>

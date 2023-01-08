@@ -1,3 +1,21 @@
+@section('custom_javascript')
+    <script>
+        jQuery(document).ready(function () {
+            jQuery('.language-select').click(function (event) {
+                let language = jQuery(this).text();
+
+                jQuery.ajax({
+                    url: "{{ route('swapLanguage') }}",
+                    method: "GET",
+                    data: {
+                        "locale": language,
+                    }
+                });
+            });
+        });
+    </script>
+@endsection
+
 <header class="header-area">
     <!-- HEADER-TOP START -->
     <div class="header-top hidden-xs">
@@ -9,9 +27,9 @@
                         <ul class="language">
                             <li><a href="#"><img class="right-5" src="img/flags/gb.png" alt="#">English<i class="fa fa-caret-down left-5"></i></a>
                                 <ul>
-                                    <li><a href="#"><img class="right-5" src="img/flags/fr.png" alt="#">French</a></li>
-                                    <li><a href="#"><img class="right-5" src="img/flags/gb.png" alt="#">English</a></li>
-                                    <li><a href="#"><img class="right-5" src="img/flags/gb.png" alt="#">English</a></li>
+                                    @foreach ($languages as $language)
+                                        <li><a href="#" class="language-select"><img class="right-5" src="img/flags/fr.png" alt="#">{{ $language->slug }}</a></li>\
+                                    @endforeach
                                 </ul>
                             </li>
                         </ul>
