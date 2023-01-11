@@ -12,8 +12,8 @@ class Language extends Model
     use HasFactory;
 
     private array $properties = [
-        ['ru'],
-        ['en'],
+        ['slug' => 'ru'],
+        ['slug' => 'en'],
     ];
 
     public function getProperties(): array

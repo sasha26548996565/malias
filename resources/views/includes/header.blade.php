@@ -125,7 +125,7 @@
             <div class="row">
                 <div class="col-md-3 col-sm-12">
                     <div class="logo">
-                        <a href="index.html" title="Malias"><img src="img/logo.png" alt="Malias"></a>
+                        <a href="{{ route('index') }}" title="Malias"><img src="img/logo.png" alt="Malias"></a>
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-12">
@@ -144,8 +144,8 @@
                                 </select>
                             </div>
                             <div class="header-search">
-                                <form action="#">
-                                    <input type="text" placeholder="Search">
+                                <form action="{{ route('search') }}" method="GET">
+                                    <input type="text" name="search" required placeholder="Search">
                                     <button type="submit"><i class="fa fa-search"></i></button>
                                 </form>
                             </div>

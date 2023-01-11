@@ -34,6 +34,7 @@
 
 		@yield('content')
 
+        @include('includes.brand_logo')
         @include('includes.subscribe_area')
         @include('includes.footer')
 
