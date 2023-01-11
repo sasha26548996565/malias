@@ -29,7 +29,7 @@
                                                                 </div>
                                                             @endif
                                                             <div class="product-img">
-                                                                <a href="#">
+                                                                <a href="{{ route('product.show') }}">
                                                                     @foreach ($product->images as $image)
                                                                         <img class="{{ $loop->first ? 'primary-img' : 'secondary-img' }}"
                                                                                 src="{{ Storage::url('products/'. $image->name) }}"
@@ -38,7 +38,7 @@
                                                                 </a>
                                                             </div>
                                                             <div class="product-description">
-                                                                <h5><a href="#">{{ $product->name }}</a></h5>
+                                                                <h5><a href="{{ route('product.show') }}">{{ $product->name }}</a></h5>
                                                                 <div class="price-box">
                                                                     @if ($product->issetDiscount())
                                                                         <span class="price">{{ $product->getPriceWithDiscount() }}$</span>

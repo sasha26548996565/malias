@@ -11,7 +11,7 @@ use App\Http\Requests\Main\SearchRequest;
 
 class SearchController extends Controller
 {
-    public function __invoke(SearchRequest $request): View
+    public function searchProduct(SearchRequest $request): View
     {
         $searchString = $request->validated()['search'];
         $products = Product::where('name', 'LIKE', '%'. $searchString .'%')

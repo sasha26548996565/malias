@@ -35,6 +35,11 @@ class Product extends Model
         return $this->hasMany(Images::class, 'product_id', 'id');
     }
 
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class, 'product_id', 'id');
+    }
+
     public function isSale(): bool
     {
         return $this->discount >= 10;
@@ -72,5 +77,10 @@ class Product extends Model
     public function issetDiscount(): bool
     {
         return $this->discount ? true : false;
+    }
+
+    public function isAvailable(): bool
+    {
+        return $this->count > 0;
     }
 }

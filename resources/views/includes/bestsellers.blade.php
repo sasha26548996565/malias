@@ -10,29 +10,7 @@
         <div class="active-bestseller sidebar">
             <div class="col-xs-12">
                 @foreach ($popularProducts as $product)
-                    <div class="single-product">
-                        <div class="product-img">
-                            <a href="#">
-                                <img class="primary-img" src="{{ Storage::url('products/'. $product->preview) }}" alt="Product">
-                            </a>
-                        </div>
-                        <div class="product-description">
-                            <h5><a href="#">{{ $product->name }}</a></h5>
-                            <div class="price-box">
-                                @if ($product->issetDiscount())
-                                    <span class="price gfont-2">{{ $product->getPriceWithDiscount() }}$</span>
-                                    <span class="old-price gfont-2">{{ $product->price / 100 }}$</span>
-                                @else
-                                    <span class="price gfont-2">{{ $product->price / 100 }}$</span>
-                                @endif
-                            </div>
-                            <span class="rating">
-                                @for ($i = 0; $i < $product->rate; $i++)
-                                    <i class="fa fa-star"></i>
-                                @endfor
-                            </span>
-                        </div>
-                    </div>
+                    @include('includes.card_product', $product)
                 @endforeach
             </div>
         </div>

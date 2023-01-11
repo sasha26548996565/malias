@@ -145,7 +145,7 @@
                             </div>
                             <div class="header-search">
                                 <form action="{{ route('search') }}" method="GET">
-                                    <input type="text" name="search" required placeholder="Search">
+                                    <input type="text" name="search" value="{{ old('search') }}" required placeholder="Search">
                                     <button type="submit"><i class="fa fa-search"></i></button>
                                 </form>
                             </div>

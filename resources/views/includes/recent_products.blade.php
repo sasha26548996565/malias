@@ -14,10 +14,10 @@
                             <img src="{{ Storage::url('products/'. $product->preview) }}" alt="{{ $product->name }}">
                         </div>
                         <div class="recent-posts-text">
-                            <h5><a href="#" class="recent-posts-title">{{ $product->name }}</a></h5>
+                            <h5><a href="{{ route('product.show', $product->slug) }}" class="recent-posts-title">{{ $product->name }}</a></h5>
                             <span class="recent-posts-date">{{ $product->created_at->format('Y.m.d H:i:s') }}</span>
                             <p class="posts-short-brif">{{ $product->description }}</p>
-                            <a href="#" class="posts-read-more">Read more ...</a>
+                            <a href="{{ route('product.show', $product->slug) }}" class="posts-read-more">Read more ...</a>
                         </div>
                     </div>
                 </div>

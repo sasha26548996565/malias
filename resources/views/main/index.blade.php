@@ -19,27 +19,7 @@
                                 <!-- Start Single-hot-deals -->
                                 @foreach ($hotDealProducts as $product)
                                     <div class="col-xs-12">
-                                        <div class="single-hot-deals">
-                                            <div class="hot-deals-photo">
-                                                <a href="#"><img src="{{ Storage::url('products/'. $product->preview) }}" alt="{{ $product->name }}"></a>
-                                            </div>
-                                            <div class="hot-deals-text">
-                                                <h5><a href="#" class="name-group">{{ $product->name }}</a></h5>
-                                                <span class="rating">
-                                                    @for ($i = 0; $i < $product->rate; $i++)
-                                                        <i class="fa fa-star"></i>
-                                                    @endfor
-                                                </span>
-                                                <div class="price-box">
-                                                    @if ($product->issetDiscount())
-                                                        <span class="price gfont-2">{{ $product->getPriceWithDiscount() }}$</span>
-                                                        <span class="old-price gfont-2">{{ $product->price / 100 }}$</span>
-                                                    @else
-                                                        <span class="price gfont-2">{{ $product->price / 100 }}$</span>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @include('includes.card_product', $product)
                                     </div>
                                 @endforeach
                                 <!-- End Single-hot-deals -->
@@ -67,7 +47,7 @@
 
                                         <ul role="tablist">
                                             @foreach ($categories->where('parentId', $category->id) as $childCategory)
-                                            <li role="presentation" class=" active"><a href="#display-1-1" role="tab"
+                                                <li role="presentation" class=" active"><a href="#display-1-1" role="tab"
                                                     data-toggle="tab">{{ $childCategory->name }}</a></li>
                                             @endforeach
                                         </ul>
@@ -88,63 +68,7 @@
                                                         <!-- Start Single-Product -->
                                                         @foreach ($category->products as $product)
                                                             <div class="col-xs-12">
-                                                                <div class="single-product">
-                                                                    @if ($product->is_new)
-                                                                        <div class="label_new">
-                                                                            <span class="new">new</span>
-                                                                        </div>
-                                                                    @endif
-                                                                    @if ($product->isSale())
-                                                                        <div class="sale-off">
-                                                                            <span class="sale-percent">-{{ $product->discount }}%</span>
-                                                                        </div>
-                                                                    @endif
-                                                                    <div class="product-img">
-                                                                        <a href="#">
-                                                                            @foreach ($product->images as $image)
-                                                                                <img class="{{ $loop->first ? 'primary-img' : 'secondary-img' }}"
-                                                                                        src="{{ Storage::url('products/'. $image->name) }}"
-                                                                                            alt="{{ $product->name }}">
-                                                                            @endforeach
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="product-description">
-                                                                        <h5><a href="#">{{ $product->name }}</a></h5>
-                                                                        <div class="price-box">
-                                                                            @if ($product->issetDiscount())
-                                                                                <span class="price">{{ $product->getPriceWithDiscount() }}$</span>
-                                                                                <span class="old-price">{{ $product->price / 100 }}$</span>
-                                                                            @else
-                                                                                <span class="price">{{ $product->price / 100 }}$</span>
-                                                                            @endif
-                                                                        </div>
-                                                                        <span class="rating">
-                                                                            @for ($i = 0; $i < $product->rate; $i++)
-                                                                                <i class="fa fa-star"></i>
-                                                                            @endfor
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="product-action">
-                                                                        <div class="button-group">
-                                                                            <div class="product-button">
-                                                                                <button><i class="fa fa-shopping-cart"></i> Add to
-                                                                                    Cart</button>
-                                                                            </div>
-                                                                            <div class="product-button-2">
-                                                                                <a href="#" data-toggle="tooltip"
-                                                                                    title="Wishlist"><i
-                                                                                        class="fa fa-heart-o"></i></a>
-                                                                                <a href="#" data-toggle="tooltip"
-                                                                                    title="Compare"><i
-                                                                                        class="fa fa-signal"></i></a>
-                                                                                <a href="#" class="modal-view"
-                                                                                    data-toggle="modal"
-                                                                                    data-target="#productModal"><i
-                                                                                        class="fa fa-search-plus"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                                @include('includes.card_product', $product)
                                                             </div>
                                                         @endforeach
                                                         <!-- End Single-Product -->
@@ -159,63 +83,7 @@
                                                         <!-- Start Single-Product -->
                                                         @foreach ($category->products as $product)
                                                             <div class="col-xs-12">
-                                                                <div class="single-product">
-                                                                    @if ($product->is_new)
-                                                                        <div class="label_new">
-                                                                            <span class="new">new</span>
-                                                                        </div>
-                                                                    @endif
-                                                                    @if ($product->isSale())
-                                                                        <div class="sale-off">
-                                                                            <span class="sale-percent">-{{ $product->discount }}%</span>
-                                                                        </div>
-                                                                    @endif
-                                                                    <div class="product-img">
-                                                                        <a href="#">
-                                                                            @foreach ($product->images as $image)
-                                                                                <img class="{{ $loop->first ? 'primary-img' : 'secondary-img' }}"
-                                                                                        src="{{ Storage::url('products/'. $image->name) }}"
-                                                                                            alt="{{ $product->name }}">
-                                                                            @endforeach
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="product-description">
-                                                                        <h5><a href="#">{{ $product->name }}</a></h5>
-                                                                        <div class="price-box">
-                                                                            @if ($product->issetDiscount())
-                                                                                <span class="price">{{ $product->getPriceWithDiscount() }}$</span>
-                                                                                <span class="old-price">{{ $product->price / 100 }}$</span>
-                                                                            @else
-                                                                                <span class="price">{{ $product->price / 100 }}$</span>
-                                                                            @endif
-                                                                        </div>
-                                                                        <span class="rating">
-                                                                            @for ($i = 0; $i < $product->rate; $i++)
-                                                                                <i class="fa fa-star"></i>
-                                                                            @endfor
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="product-action">
-                                                                        <div class="button-group">
-                                                                            <div class="product-button">
-                                                                                <button><i class="fa fa-shopping-cart"></i> Add to
-                                                                                    Cart</button>
-                                                                            </div>
-                                                                            <div class="product-button-2">
-                                                                                <a href="#" data-toggle="tooltip"
-                                                                                    title="Wishlist"><i
-                                                                                        class="fa fa-heart-o"></i></a>
-                                                                                <a href="#" data-toggle="tooltip"
-                                                                                    title="Compare"><i
-                                                                                        class="fa fa-signal"></i></a>
-                                                                                <a href="#" class="modal-view"
-                                                                                    data-toggle="modal"
-                                                                                    data-target="#productModal"><i
-                                                                                        class="fa fa-search-plus"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                                @include('includes.card_product', $product)
                                                             </div>
                                                         @endforeach
                                                         <!-- End Single-Product -->
@@ -230,63 +98,7 @@
                                                         <!-- Start Single-Product -->
                                                         @foreach ($category->products as $product)
                                                             <div class="col-xs-12">
-                                                                <div class="single-product">
-                                                                    @if ($product->is_new)
-                                                                        <div class="label_new">
-                                                                            <span class="new">new</span>
-                                                                        </div>
-                                                                    @endif
-                                                                    @if ($product->isSale())
-                                                                        <div class="sale-off">
-                                                                            <span class="sale-percent">-{{ $product->discount }}%</span>
-                                                                        </div>
-                                                                    @endif
-                                                                    <div class="product-img">
-                                                                        <a href="#">
-                                                                            @foreach ($product->images as $image)
-                                                                                <img class="{{ $loop->first ? 'primary-img' : 'secondary-img' }}"
-                                                                                        src="{{ Storage::url('products/'. $image->name) }}"
-                                                                                            alt="{{ $product->name }}">
-                                                                            @endforeach
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="product-description">
-                                                                        <h5><a href="#">{{ $product->name }}</a></h5>
-                                                                        <div class="price-box">
-                                                                            @if ($product->issetDiscount())
-                                                                                <span class="price">{{ $product->getPriceWithDiscount() }}$</span>
-                                                                                <span class="old-price">{{ $product->price / 100 }}$</span>
-                                                                            @else
-                                                                                <span class="price">{{ $product->price / 100 }}$</span>
-                                                                            @endif
-                                                                        </div>
-                                                                        <span class="rating">
-                                                                            @for ($i = 0; $i < $product->rate; $i++)
-                                                                                <i class="fa fa-star"></i>
-                                                                            @endfor
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="product-action">
-                                                                        <div class="button-group">
-                                                                            <div class="product-button">
-                                                                                <button><i class="fa fa-shopping-cart"></i> Add to
-                                                                                    Cart</button>
-                                                                            </div>
-                                                                            <div class="product-button-2">
-                                                                                <a href="#" data-toggle="tooltip"
-                                                                                    title="Wishlist"><i
-                                                                                        class="fa fa-heart-o"></i></a>
-                                                                                <a href="#" data-toggle="tooltip"
-                                                                                    title="Compare"><i
-                                                                                        class="fa fa-signal"></i></a>
-                                                                                <a href="#" class="modal-view"
-                                                                                    data-toggle="modal"
-                                                                                    data-target="#productModal"><i
-                                                                                        class="fa fa-search-plus"></i></a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                                @include('includes.card_product', $product)
                                                             </div>
                                                         @endforeach
                                                         <!-- End Single-Product -->
@@ -331,63 +143,7 @@
                                                     <!-- Start Single-Product -->
                                                     @foreach ($newestProducts as $product)
                                                         <div class="col-xs-12">
-                                                            <div class="single-product">
-                                                                @if ($product->is_new)
-                                                                    <div class="label_new">
-                                                                        <span class="new">new</span>
-                                                                    </div>
-                                                                @endif
-                                                                @if ($product->isSale())
-                                                                    <div class="sale-off">
-                                                                        <span class="sale-percent">-{{ $product->discount }}%</span>
-                                                                    </div>
-                                                                @endif
-                                                                <div class="product-img">
-                                                                    <a href="#">
-                                                                        @foreach ($product->images as $image)
-                                                                            <img class="{{ $loop->first ? 'primary-img' : 'secondary-img' }}"
-                                                                                    src="{{ Storage::url('products/'. $image->name) }}"
-                                                                                        alt="{{ $product->name }}">
-                                                                        @endforeach
-                                                                    </a>
-                                                                </div>
-                                                                <div class="product-description">
-                                                                    <h5><a href="#">{{ $product->name }}</a></h5>
-                                                                    <div class="price-box">
-                                                                        @if ($product->issetDiscount())
-                                                                            <span class="price">{{ $product->getPriceWithDiscount() }}$</span>
-                                                                            <span class="old-price">{{ $product->price / 100 }}$</span>
-                                                                        @else
-                                                                            <span class="price">{{ $product->price / 100 }}$</span>
-                                                                        @endif
-                                                                    </div>
-                                                                    <span class="rating">
-                                                                        @for ($i = 0; $i < $product->rate; $i++)
-                                                                            <i class="fa fa-star"></i>
-                                                                        @endfor
-                                                                    </span>
-                                                                </div>
-                                                                <div class="product-action">
-                                                                    <div class="button-group">
-                                                                        <div class="product-button">
-                                                                            <button><i class="fa fa-shopping-cart"></i> Add to
-                                                                                Cart</button>
-                                                                        </div>
-                                                                        <div class="product-button-2">
-                                                                            <a href="#" data-toggle="tooltip"
-                                                                                title="Wishlist"><i
-                                                                                    class="fa fa-heart-o"></i></a>
-                                                                            <a href="#" data-toggle="tooltip"
-                                                                                title="Compare"><i
-                                                                                    class="fa fa-signal"></i></a>
-                                                                            <a href="#" class="modal-view"
-                                                                                data-toggle="modal"
-                                                                                data-target="#productModal"><i
-                                                                                    class="fa fa-search-plus"></i></a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            @include('includes.card_product', $product)
                                                         </div>
                                                     @endforeach
                                                 </div>
@@ -401,61 +157,7 @@
                                                     <!-- Start Single-Product -->
                                                     @foreach ($saleProducts as $product)
                                                         <div class="col-xs-12">
-                                                            <div class="single-product">
-                                                                @if ($product->is_new)
-                                                                    <div class="label_new">
-                                                                        <span class="new">new</span>
-                                                                    </div>
-                                                                @endif
-                                                                <div class="sale-off">
-                                                                    <span class="sale-percent">-{{ $product->discount }}%</span>
-                                                                </div>
-                                                                <div class="product-img">
-                                                                    <a href="#">
-                                                                        @foreach ($product->images as $image)
-                                                                            <img class="{{ $loop->first ? 'primary-img' : 'secondary-img' }}"
-                                                                                    src="{{ Storage::url('products/'. $image->name) }}"
-                                                                                        alt="{{ $product->name }}">
-                                                                        @endforeach
-                                                                    </a>
-                                                                </div>
-                                                                <div class="product-description">
-                                                                    <h5><a href="#">{{ $product->name }}</a></h5>
-                                                                    <div class="price-box">
-                                                                        @if ($product->issetDiscount())
-                                                                            <span class="price">{{ $product->getPriceWithDiscount() }}$</span>
-                                                                            <span class="old-price">{{ $product->price / 100 }}$</span>
-                                                                        @else
-                                                                            <span class="price">{{ $product->price / 100 }}$</span>
-                                                                        @endif
-                                                                    </div>
-                                                                    <span class="rating">
-                                                                        @for ($i = 0; $i < $product->rate; $i++)
-                                                                            <i class="fa fa-star"></i>
-                                                                        @endfor
-                                                                    </span>
-                                                                </div>
-                                                                <div class="product-action">
-                                                                    <div class="button-group">
-                                                                        <div class="product-button">
-                                                                            <button><i class="fa fa-shopping-cart"></i> Add to
-                                                                                Cart</button>
-                                                                        </div>
-                                                                        <div class="product-button-2">
-                                                                            <a href="#" data-toggle="tooltip"
-                                                                                title="Wishlist"><i
-                                                                                    class="fa fa-heart-o"></i></a>
-                                                                            <a href="#" data-toggle="tooltip"
-                                                                                title="Compare"><i
-                                                                                    class="fa fa-signal"></i></a>
-                                                                            <a href="#" class="modal-view"
-                                                                                data-toggle="modal"
-                                                                                data-target="#productModal"><i
-                                                                                    class="fa fa-search-plus"></i></a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            @include('includes.card_product', $product)
                                                         </div>
                                                     @endforeach
                                                 </div>
