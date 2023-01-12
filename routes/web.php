@@ -10,6 +10,10 @@ Route::namespace('Main')->middleware('location')->group(function () {
     Route::get('/search', 'SearchController@searchProduct')->name('search');
     Route::get('/product/{slug}', 'ProductController@show')->name('product.show');
     Route::post('/review/{product}', 'ReviewController@addReview')->name('review');
+
+    Route::name('cart.')->prefix('cart')->controller('CartController')->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
 });
 
 Auth::routes();

@@ -153,7 +153,7 @@
                         <div class="top-cart">
                             <ul>
                                 <li>
-                                    <a href="cart.html">
+                                    <a href="{{ route('cart.index') }}">
                                         <span class="cart-icon"><i class="fa fa-shopping-cart"></i></span>
                                         <span class="cart-total">
                                             <span class="cart-title">shopping cart</span>
@@ -199,7 +199,7 @@
                                                 <span class="amount">$550.00</span>
                                             </span>
                                             <span class="cart-button-top">
-                                                <a href="cart.html">View Cart</a>
+                                                <a href="{{ route('cart.index') }}">View cart</a>
                                                 <a href="checkout.html">Checkout</a>
                                             </span>
                                         </div>
@@ -229,7 +229,7 @@
                                 <li><a href="shop.html">Special Products</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul>
-                                        <li><a href="cart.html">Cart</a></li>
+                                        <li><a href="{{ route('cart.index') }}">Cart</a></li>
                                         <li><a href="checkout.html">Checkout</a></li>
                                         @guest
                                             <li><a href="{{ route('register') }}">Create Account</a></li>
@@ -263,7 +263,7 @@
                             <li><a href="shop-list.html">New Products</a></li>
                             <li><a href="#">Pages</a>
                                 <ul>
-                                    <li><a href="cart.html">Cart</a></li>
+                                    <li><a href="{{ route('cart.index') }}">Cart</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
                                     <li><a href="{{ route('register') }}">Create Account</a></li>
                                     <li><a href="{{ route('login') }}">Login</a></li>
