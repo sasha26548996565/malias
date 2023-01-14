@@ -3,21 +3,17 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::namespace('Main')->middleware('location')->group(function () {
+    Route::get('/', 'IndexController')->name('index');
+    Route::post('/subscription', 'SubscriptionController@subscribe')->name('subscribe');
+    Route::get('/locale', 'LocationController@swapLanguage')->name('swapLanguage');
+    Route::get('/search', 'SearchController@searchProduct')->name('search');
+    Route::get('/product/{slug}', 'ProductController@show')->name('product.show');
+    Route::post('/review/{product}', 'ReviewController@addReview')->name('review');
 
-Route::get('/', function () {
-    return view('welcome');
+    Route::name('cart.')->prefix('cart')->controller('CartController')->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
 });
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
