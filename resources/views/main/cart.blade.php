@@ -44,54 +44,38 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="text-center">
-                                                    <a href="#"><img class="img-thumbnail" src="img/product/cart/1.jpg" alt="#" /></a>
-                                                </td>
-                                                <td class="text-left">
-                                                    <a href="#">More-Or-Less</a>
-                                                </td>
-                                                <td class="text-left">Product 14</td>
-                                                <td class="text-left">
-                                                    <div class="btn-block cart-put">
-                                                        <input class="form-control" type="number" placeholder="1" />
-                                                        <div class="input-group-btn cart-buttons">
-                                                            <button class="btn btn-primary" data-toggle="tooltip" title="Update">
-                                                                <i class="fa fa-refresh"></i>
-                                                            </button>
-                                                            <button class="btn btn-danger" data-toggle="tooltip" title="Remove">
-                                                                <i class="fa fa-times-circle"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-right">$100.00</td>
-                                                <td class="text-right">$100.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">
-                                                    <a href="#"><img class="img-thumbnail" src="img/product/cart/2.jpg" alt="#" /></a>
-                                                </td>
-                                                <td class="text-left">
-                                                    <a href="#">More-Or-Less</a>
-                                                </td>
-                                                <td class="text-left">Product 14</td>
-                                                <td class="text-left">
-                                                    <div class="btn-block cart-put">
-                                                        <input class="form-control" type="number" placeholder="1" />
-                                                        <div class="input-group-btn cart-buttons">
-                                                            <button class="btn btn-primary" data-toggle="tooltip" title="Update" >
-                                                                <i class="fa fa-refresh"></i>
-                                                            </button>
-                                                            <button class="btn btn-danger" data-toggle="tooltip" title="Remove">
-                                                                <i class="fa fa-times-circle"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-right">$100.00</td>
-                                                <td class="text-right">$100.00</td>
-                                            </tr>
+                                            @foreach ($cart as $product)
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <a href="{{ route('product.show', $product->attributes['slug']) }}">
+                                                            <img class="img-thumbnail"
+                                                                src="{{ Storage::url('products/'. $product->attributes['preview']) }}"
+                                                                    alt="{{ $product->name }}" />
+                                                        </a>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <a href="{{ route('product.show', $product->attributes['slug']) }}">{{ $product->name }}</a>
+                                                    </td>
+                                                    <td class="text-left">
+                                                        <form action="{{ route('cart.action', $product->id) }}" class="btn-block cart-put" method="POST">
+                                                            @csrf
+                                                            <input class="form-control" type="number" name="quantity" min="-{{ $product->quantity - 1 }}"
+                                                                placeholder="{{ $product->quantity }}" />
+                                                            <div class="input-group-btn cart-buttons">
+                                                                <button type="submit" name="action" value="update" class="btn btn-primary" data-toggle="tooltip" title="Update">
+                                                                    <i class="fa fa-refresh"></i>
+                                                                </button>
+                                                                <button type="submit" name="action" value="remove" class="btn btn-danger" data-toggle="tooltip" title="Remove">
+                                                                    <i class="fa fa-times-circle"></i>
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </td>
+                                                    <td class="text-right">{{ $product->quantity }}</td>
+                                                    <td class="text-right">{{ $product->price }}$</td>
+                                                    <td class="text-right">{{ $product->getPriceSum() / 100 }}$</td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

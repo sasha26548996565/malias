@@ -200,6 +200,9 @@ return [
 
         Barryvdh\Debugbar\ServiceProvider::class,
 
+        Darryldecode\Cart\CartServiceProvider::class
+
+
     ],
 
     /*
