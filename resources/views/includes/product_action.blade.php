@@ -1,9 +1,11 @@
 <div class="product-action">
     <div class="button-group">
-        <div class="product-button">
-            <button><i class="fa fa-shopping-cart"></i> Add to
-                Cart</button>
-        </div>
+        <form class="product-button" action="{{ route('cart.add', $product->id) }}" method="POST">
+            @csrf
+            <button type="submit"><i class="fa fa-shopping-cart"></i>Add to
+                Cart
+            </button>
+        </form>
         <div class="product-button-2">
             <a href="#" data-toggle="tooltip"
                 title="Wishlist"><i

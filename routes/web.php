@@ -12,7 +12,12 @@ Route::namespace('Main')->middleware('location')->group(function () {
     Route::post('/review/{product}', 'ReviewController@addReview')->name('review');
 
     Route::name('cart.')->prefix('cart')->controller('CartController')->group(function () {
-        Route::get('/', 'index')->name('index');
+        Route::post('/add/{product}/{quantity?}', 'add')->name('add');
+
+        Route::middleware('cart_not_empty')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/action/{product}', 'action')->name('action');
+        });
     });
 });
 

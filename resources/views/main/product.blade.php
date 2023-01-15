@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                             <div class="col-md-7 col-sm-7 col-xs-12">
-                                <h2 class="title-product"> Toch Prond</h2>
+                                <h2 class="title-product">{{ $product->name }}</h2>
                                 <div class="about-toch-prond">
                                     <p>
                                         <span class="rating">
@@ -57,6 +57,12 @@
                                     <hr />
                                     <p class="short-description">{{ $product->description }}</p>
                                     <hr />
+                                    @if ($product->properties->count() > 0)
+                                        @foreach ($product->properties as $property)
+                                            <span>{{ $property->name }}</span> -
+                                            <span>{{ $property->pivot->value }}</span><hr />
+                                        @endforeach
+                                    @endif
                                     <span class="current-price">{{ $product->price / 100 }}$</span>
                                     <span class="item-stock">Availability:
                                         @if ($product->isAvailable())
@@ -64,27 +70,30 @@
                                         @endif
                                     </span>
                                 </div>
-                                <div class="about-product">
-                                    @foreach ($product->properties as $property)
-                                        <div class="product-select product-color">
-                                            <label><sup>*</sup>{{ $property->name }}</label>
-                                            <select class="form-control">
-                                                <option> --- Please Select --- </option>
-                                                @foreach ($property->propertyOption as $option)
-                                                    <option value="{{ $option->id }}">{{ $option->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <div class="product-quantity">
-                                    <span>Qty</span>
-                                    <input type="number" placeholder="1" />
-                                    <button type="submit" class="toch-button toch-add-cart">Add to Cart</button>
-                                    <button type="submit" class="toch-button toch-wishlist">wishlist</button>
-                                    <button type="submit" class="toch-button toch-compare">Compare</button>
-                                    <hr />
-                                </div>
+                                <form action="{{ route('cart.add', $product->id) }}" method="POST" style="display: inline-block;">
+                                    @csrf
+                                    <div class="about-product">
+                                        @foreach ($options as $option => $values)
+                                            <div class="product-select product-color">
+                                                <label><sup>*</sup>{{ $option }}</label>
+                                                <select name="" class="form-control">
+                                                    <option> --- Please Select --- </option>
+                                                    @foreach ($values as $value)
+                                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="product-quantity">
+                                        <span>Qty</span>
+                                        <input type="number" name="quantity" placeholder="1" min="1" max="{{ $product->count }}" />
+                                        <button type="submit" class="toch-button toch-add-cart">Add to Cart</button>
+                                        <button type="submit" class="toch-button toch-wishlist">wishlist</button>
+                                        <button type="submit" class="toch-button toch-compare">Compare</button>
+                                        <hr />
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <!-- Start Toch-Box -->
