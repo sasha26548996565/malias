@@ -57,9 +57,12 @@
                                                         <a href="{{ route('product.show', $product->attributes['slug']) }}">{{ $product->name }}</a>
                                                     </td>
                                                     <td class="text-left">
+                                                        @if (session()->has('not_available'))
+                                                            <div class="alert alert-danger">{{ session()->get('not_available') }}</div>
+                                                        @endif
                                                         <form action="{{ route('cart.action', $product->id) }}" class="btn-block cart-put" method="POST">
                                                             @csrf
-                                                            <input class="form-control" type="number" name="quantity" min="-{{ $product->quantity - 1 }}"
+                                                            <input class="form-control" type="number" name="quantity" min="1" max="{{ $product->attributes['count'] }}"
                                                                 placeholder="{{ $product->quantity }}" />
                                                             <div class="input-group-btn cart-buttons">
                                                                 <button type="submit" name="action" value="update" class="btn btn-primary" data-toggle="tooltip" title="Update">

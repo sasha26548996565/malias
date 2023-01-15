@@ -22,7 +22,7 @@ class CartController extends Controller
         return view('main.cart', compact('cart'));
     }
 
-    public function add(StoreRequest $request, Product $product, int $quantity = 1): RedirectResponse
+    public function add(Product $product, int $quantity = 1): RedirectResponse
     {
         if (session('cartId') == null)
             session(['cartId' => uniqid()]);
@@ -35,6 +35,7 @@ class CartController extends Controller
             'attributes' => [
                 'slug' => $product->slug,
                 'preview' => $product->preview,
+                'count' => $product->count,
             ],
         ]);
 
@@ -48,7 +49,10 @@ class CartController extends Controller
         switch ($params['action'])
         {
             case 'update':
-                $cart->update($product->id, ['quantity' => $params['quantity']]);
+                if ($product->checkAvailable((int) $params['quantity']))
+                    $cart->update($product->id, ['quantity' => ['relative' => false, 'value' => $params['quantity']]]);
+                else
+                    session()->flash('not_available', 'product not available in count'. $params['quantity']);
                 break;
             case 'remove':
                 $cart->remove($product->id);
