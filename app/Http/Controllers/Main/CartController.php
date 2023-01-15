@@ -7,15 +7,16 @@ namespace App\Http\Controllers\Main;
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
-use Barryvdh\Debugbar\Facades\Debugbar;
-use App\Http\Requests\Cart\StoreRequest;
 use Darryldecode\Cart\Facades\CartFacade;
 use App\Http\Requests\Main\Cart\ActionRequest;
+use App\Services\CartService;
 
 class CartController extends Controller
 {
+    public function __construct(private CartService $cartService)
+    {}
+
     public function index(): View
     {
         $cart = CartFacade::session(session()->get('cartId'))->getContent();
@@ -27,18 +28,7 @@ class CartController extends Controller
         if (session('cartId') == null)
             session(['cartId' => uniqid()]);
 
-        CartFacade::session(session()->get('cartId'))->add([
-            'id' => $product->id,
-            'name' => $product->name,
-            'price' => $product->price,
-            'quantity' => $quantity,
-            'attributes' => [
-                'slug' => $product->slug,
-                'preview' => $product->preview,
-                'count' => $product->count,
-            ],
-        ]);
-
+        $this->cartService->add($product, session()->get('cartId'), $quantity);
         return to_route('cart.index');
     }
 
@@ -50,12 +40,12 @@ class CartController extends Controller
         {
             case 'update':
                 if ($product->checkAvailable((int) $params['quantity']))
-                    $cart->update($product->id, ['quantity' => ['relative' => false, 'value' => $params['quantity']]]);
+                    $this->cartService->update($product->id, $cart, (int) $params['quantity']);
                 else
                     session()->flash('not_available', 'product not available in count'. $params['quantity']);
                 break;
             case 'remove':
-                $cart->remove($product->id);
+                $this->cartService->remove($product->id, $cart);
                 break;
         }
 

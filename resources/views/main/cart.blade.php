@@ -63,7 +63,7 @@
                                                         <form action="{{ route('cart.action', $product->id) }}" class="btn-block cart-put" method="POST">
                                                             @csrf
                                                             <input class="form-control" type="number" name="quantity" min="1" max="{{ $product->attributes['count'] }}"
-                                                                placeholder="{{ $product->quantity }}" />
+                                                                placeholder="{{ $product->quantity }}" value="{{ $product->quantity }}" />
                                                             <div class="input-group-btn cart-buttons">
                                                                 <button type="submit" name="action" value="update" class="btn btn-primary" data-toggle="tooltip" title="Update">
                                                                     <i class="fa fa-refresh"></i>
@@ -75,7 +75,7 @@
                                                         </form>
                                                     </td>
                                                     <td class="text-right">{{ $product->quantity }}</td>
-                                                    <td class="text-right">{{ $product->price }}$</td>
+                                                    <td class="text-right">{{ $product->price / 100 }}$</td>
                                                     <td class="text-right">{{ $product->getPriceSum() / 100 }}$</td>
                                                 </tr>
                                             @endforeach
