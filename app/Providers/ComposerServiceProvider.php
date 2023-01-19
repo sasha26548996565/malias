@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\ViewComposers\CartComposer;
 use Illuminate\Support\Facades\View;
 use App\ViewComposers\CategoryComposer;
 use App\ViewComposers\LanguageComposer;
@@ -23,5 +24,6 @@ class ComposerServiceProvider extends ServiceProvider
         View::composer('main.index', HotDealProductComposer::class);
         View::composer('includes.bestsellers', PopularProductComposer::class);
         View::composer('includes.recent_products', RecentProductsComposer::class);
+        View::composer('includes.header', CartComposer::class);
     }
 }

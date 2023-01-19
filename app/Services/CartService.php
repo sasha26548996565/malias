@@ -23,6 +23,7 @@ class CartService
                 'preview' => $product->preview,
                 'count' => $product->count,
             ],
+            'associatedModel' => $product,
         ]);
     }
 

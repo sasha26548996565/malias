@@ -37,14 +37,13 @@
                                             <tr>
                                                 <td class="text-center">Image</td>
                                                 <td class="text-left">Product Name</td>
-                                                <td class="text-left">Model</td>
                                                 <td class="text-left">Quantity</td>
                                                 <td class="text-right">Unit Price</td>
                                                 <td class="text-right">Total</td>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($cart as $product)
+                                            @foreach ($products as $product)
                                                 <tr>
                                                     <td class="text-center">
                                                         <a href="{{ route('product.show', $product->attributes['slug']) }}">
@@ -74,7 +73,6 @@
                                                             </div>
                                                         </form>
                                                     </td>
-                                                    <td class="text-right">{{ $product->quantity }}</td>
                                                     <td class="text-right">{{ $product->price / 100 }}$</td>
                                                     <td class="text-right">{{ $product->getPriceSum() / 100 }}$</td>
                                                 </tr>
@@ -96,90 +94,19 @@
                                                 </h4>
                                             </div>
                                             <div id="coupon" class="collapse in">
-                                                <div class="panel-body">
+                                                <form class="panel-body" action="{{ route('cart.setCoupon') }}" method="POST">
+                                                    @csrf
                                                     <div class="col-sm-2">
                                                         <p>Enter your coupon here</p>
                                                     </div>
                                                     <div class="input-group">
-                                                        <input class="form-control" type="text" placeholder="Enter your coupon here" />
+                                                        <input class="form-control" name="coupon" type="text" required placeholder="Enter your coupon here" />
                                                         <button type="submit" class="btn btn-primary">Apply Coupon</button>
                                                     </div>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                         <!-- End Coupon -->
-                                        <!-- Start Voucher -->
-                                        <div class="panel panel_default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a class="accordion-trigger collapsed" data-toggle="collapse" data-parent="#accordion" href="#voucher">Use Gift Voucher <i class="fa fa-caret-down"></i> </a>
-                                                </h4>
-                                            </div>
-                                            <div id="voucher" class="collapse">
-                                                <div class="panel-body">
-                                                    <div class="col-sm-2">
-                                                        <p>Enter your gift voucher code here</p>
-                                                    </div>
-                                                    <div class="input-group">
-                                                        <input class="form-control" type="text" placeholder="Enter your gift voucher code here" />
-                                                        <button type="submit" class="btn btn-primary">Apply Voucher</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Start Voucher -->
-                                        <!-- Start Shipping -->
-                                        <div class="panel panel_default">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a class="accordion-trigger collapsed" data-toggle="collapse" data-parent="#accordion" href="#shipping">Estimate Shipping & Taxes <i class="fa fa-caret-down"></i> </a>
-                                                </h4>
-                                            </div>
-                                            <div id="shipping" class="collapse">
-                                                <div class="panel-body">
-                                                    <div class="col-sm-12">
-                                                        <p>Enter your destination to get a shipping estimate.</p>
-                                                    </div>
-                                                    <div class="form-horizontal">
-                                                        <div class="form-group">
-                                                            <label class="col-sm-2 control-label"><sup>*</sup>Country</label>
-                                                            <div class="col-sm-10">
-                                                                <select class="form-control">
-                                                                    <option> --- Please Select --- </option>
-                                                                    <option> Bangladesh </option>
-                                                                    <option> United States </option>
-                                                                    <option> United Kingdom </option>
-                                                                    <option> Canada </option>
-                                                                    <option> Malaysia </option>
-                                                                    <option> United Arab Emirates </option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="col-sm-2 control-label"><sup>*</sup>Region / State</label>
-                                                            <div class="col-sm-10">
-                                                                <select class="form-control">
-                                                                    <option> --- Please Select --- </option>
-                                                                    <option> Aberdeen </option>
-                                                                    <option> Bedfordshire </option>
-                                                                    <option> Caerphilly </option>
-                                                                    <option> Denbighshire </option>
-                                                                    <option> East Ayrshire </option>
-                                                                    <option> Falkirk </option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label class="col-sm-2 control-label"><sup>*</sup>Post Code</label>
-                                                            <div class="col-sm-10">
-                                                                <input type="text" class="form-control" placeholder="Post Code" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Start Shipping -->
                                     </div>
                                 </div>
                                 <!-- Accordion end -->
@@ -189,15 +116,9 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="text-right">
-                                                        <strong>Sub-Total:</strong>
-                                                    </td>
-                                                    <td class="text-right">$145.00</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="text-right">
                                                         <strong>Total:</strong>
                                                     </td>
-                                                    <td class="text-right">$145.00</td>
+                                                    <td class="text-right">{{ $totalPrice / 100 }}$</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -205,7 +126,11 @@
                                 </div>
                                 <div class="shopping-checkout">
                                     <a href="#" class="btn btn-default pull-left">Continue Shopping</a>
-                                    <a href="#" class="btn btn-primary pull-right">Checkout</a>
+                                    @auth
+                                        <a href="{{ route('checkout.index') }}" class="btn btn-primary pull-right">Checkout</a>
+                                    @else
+                                        <a href="{{ route('login') }}" class="btn btn-primary pull-right">login please for checkout</a>
+                                    @endauth
                                 </div>
                             </div>
                         </div>

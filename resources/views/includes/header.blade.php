@@ -157,46 +157,48 @@
                                         <span class="cart-icon"><i class="fa fa-shopping-cart"></i></span>
                                         <span class="cart-total">
                                             <span class="cart-title">shopping cart</span>
-                                            <span class="cart-item">2 item(s)- </span>
-                                            <span class="top-cart-price">$365.00</span>
+                                            @if ($cart != null)
+                                                <span class="cart-item">{{ $cart->getContent()->count() }} item(s)- </span>
+                                                <span class="top-cart-price">{{ $cart->getSubTotal() / 100 }}$</span>
+                                            @endif
                                         </span>
                                     </a>
                                     <div class="mini-cart-content">
-                                        <div class="cart-img-details">
-                                            <div class="cart-img-photo">
-                                                <a href="#"><img src="img/product/total-cart.jpg" alt="#"></a>
-                                            </div>
-                                            <div class="cart-img-content">
-                                                <a href="#"><h4>Prod Aldults</h4></a>
-                                                <span>
-                                                    <strong class="text-right">1 x</strong>
-                                                    <strong class="cart-price text-right">$180.00</strong>
-                                                </span>
-                                            </div>
-                                            <div class="pro-del">
-                                                <a href="#"><i class="fa fa-times"></i></a>
-                                            </div>
-                                        </div>
+                                        @if ($cart != null)
+                                            @foreach ($cart->getContent() as $product)
+                                                <div class="cart-img-details">
+                                                    <div class="cart-img-photo">
+                                                        <a href="#">
+                                                            <img src="{{ Storage::url('products/'. $product->attributes['preview']) }}"
+                                                                alt="{{ $product->name }}">
+                                                            </a>
+                                                    </div>
+                                                    <div class="cart-img-content">
+                                                        <a href="{{ route('product.show', $product->attributes['slug']) }}">
+                                                            <h4>{{ $product->name }}</h4>
+                                                        </a>
+                                                        <span>
+                                                            <strong class="text-right">{{ $product->quantity }}</strong>
+                                                            <strong class="cart-price text-right">{{ $product->price / 100 }}$</strong>
+                                                        </span>
+                                                    </div>
+                                                    <div class="pro-del">
+                                                        <a href="#"><i class="fa fa-times"></i></a>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
                                         <div class="clear"></div>
-                                        <div class="cart-img-details">
-                                            <div class="cart-img-photo">
-                                                <a href="#"><img src="img/product/total-cart2.jpg" alt="#"></a>
-                                            </div>
-                                            <div class="cart-img-content">
-                                                <a href="#"><h4>Fact Prone</h4></a>
-                                                <span>
-                                                    <strong class="text-right">1 x</strong>
-                                                    <strong class="cart-price text-right">$185.00</strong>
-                                                </span>
-                                            </div>
-                                            <div class="pro-del">
-                                                <a href="#"><i class="fa fa-times"></i></a>
-                                            </div>
-                                        </div>
                                         <div class="cart-inner-bottom">
                                             <span class="total">
                                                 Total:
-                                                <span class="amount">$550.00</span>
+                                                <span class="amount">
+                                                    @if ($cart != null)
+                                                        {{ $cart->getSubTotal() / 100 }}$
+                                                    @else
+                                                        0
+                                                    @endif
+                                                </span>
                                             </span>
                                             <span class="cart-button-top">
                                                 <a href="{{ route('cart.index') }}">View cart</a>

@@ -85,10 +85,27 @@
                                             </div>
                                         @endforeach
                                     </div>
+                                    @php
+                                        $quantity = 1;
+
+                                        if (! is_null(session()->get('cartId')))
+                                        {
+                                            $cart = \Darryldecode\Cart\Facades\CartFacade::session(session()->get('cartId'))->getContent($product->id);
+                                            $productInCart = $cart->get($product->id);
+                                            if (! is_null($productInCart))
+                                            {
+                                                $quantityProductInCart = $productInCart->quantity;
+                                                $quantity += $quantityProductInCart;
+                                                $edgeQuantity = $product->count - $productInCart->quantity;
+                                            }
+                                        }
+                                    @endphp
                                     <div class="product-quantity">
-                                        <span>Qty</span>
-                                        <input type="number" name="quantity" placeholder="1" min="1" max="{{ $product->count }}" />
-                                        <button type="submit" class="toch-button toch-add-cart">Add to Cart</button>
+                                        @if ($product->checkAvailable($quantity))
+                                            <span>Qty</span>
+                                            <input type="number" name="quantity" placeholder="1" min="1" max="{{ $edgeQuantity }}" />
+                                            <button type="submit" class="toch-button toch-add-cart">Add to Cart</button>
+                                        @endif
                                         <button type="submit" class="toch-button toch-wishlist">wishlist</button>
                                         <button type="submit" class="toch-button toch-compare">Compare</button>
                                         <hr />

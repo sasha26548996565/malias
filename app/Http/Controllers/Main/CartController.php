@@ -19,8 +19,11 @@ class CartController extends Controller
 
     public function index(): View
     {
-        $cart = CartFacade::session(session()->get('cartId'))->getContent();
-        return view('main.cart', compact('cart'));
+        $cart = CartFacade::session(session()->get('cartId'));
+        $products = $cart->getContent();
+        $totalPrice = $cart->getSubTotal();
+
+        return view('main.cart', compact('products', 'totalPrice'));
     }
 
     public function add(Product $product, int $quantity = 1): RedirectResponse
@@ -46,6 +49,8 @@ class CartController extends Controller
                 break;
             case 'remove':
                 $this->cartService->remove($product->id, $cart);
+                if ($cart->getContent()->count() <= 0)
+                    return to_route('index');
                 break;
         }
 
