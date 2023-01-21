@@ -10,7 +10,11 @@ class CartMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (session('cartId') == null)
+        $cartId = session()->get('cartId');
+        if ($cartId == null)
+            return back();
+
+        if (CartFacade::session($cartId)->getContent()->count() <= 0)
             return back();
 
         return $next($request);

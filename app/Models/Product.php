@@ -89,4 +89,9 @@ class Product extends Model
     {
         return $this->count > 0;
     }
+
+    public function checkAvailable(int $quantity): bool
+    {
+        return $this->count >= $quantity;
+    }
 }

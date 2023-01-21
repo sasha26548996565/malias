@@ -14,7 +14,6 @@ return new class extends Migration
             $table->unsignedInteger('phone')->nullable();
             $table->unsignedInteger('post_code')->nullable();
             $table->unsignedInteger('count')->default(1);
-            $table->foreignId('currency_id')->nullable()->constrained()->onDelete('CASCADE');
             $table->foreignId('region_id')->nullable()->constrained()->onDelete('CASCADE');
             $table->foreignId('country_id')->nullable()->constrained()->onDelete('CASCADE');
             $table->foreignId('promo_code_id')->nullable()->nullable()->constrained()->onDelete('CASCADE');

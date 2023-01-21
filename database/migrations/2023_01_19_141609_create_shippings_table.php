@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Currency;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -8,18 +9,15 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('currencies', function (Blueprint $table) {
+        Schema::create('shippings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('symbol');
-            $table->unsignedInteger('rate');
-            $table->softDeletes();
+            $table->unsignedInteger('price');
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('currencies');
+        Schema::dropIfExists('shippings');
     }
 };

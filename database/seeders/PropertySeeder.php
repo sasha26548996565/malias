@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\DB;
 class PropertySeeder extends Seeder
 {
     private array $properties = [
-        ['name' => 'Color', 'slug' => 'color'],
-        ['name' => 'RAM', 'slug' => 'ram'],
-        ['name' => 'Size', 'slug' => 'size'],
+        ['name' => 'Color'],
+        ['name' => 'RAM'],
+        ['name' => 'Size'],
     ];
 
     public function run(): void

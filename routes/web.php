@@ -11,13 +11,19 @@ Route::namespace('Main')->middleware('location')->group(function () {
     Route::get('/product/{slug}', 'ProductController@show')->name('product.show');
     Route::post('/review/{product}', 'ReviewController@addReview')->name('review');
 
-    Route::name('cart.')->prefix('cart')->controller('CartController')->group(function () {
-        Route::post('/add/{product}/{quantity?}', 'add')->name('add');
+    Route::name('cart.')->prefix('cart')->group(function () {
+        Route::post('/add/{product}/{quantity?}', 'CartController@add')->name('add');
 
         Route::middleware('cart_not_empty')->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::post('/action/{product}', 'action')->name('action');
+            Route::get('/', 'CartController@index')->name('index');
+            Route::post('/action/{product}', 'CartController@action')->name('action');
+            Route::post('/set-coupon', 'CouponController@setCoupon')->name('setCoupon');
         });
+    });
+
+    Route::middleware(['auth', 'cart_not_empty'])->name('checkout.')->prefix('checkout')->controller('CheckoutController')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/confirm', 'confirm')->name('confirm');
     });
 });
 

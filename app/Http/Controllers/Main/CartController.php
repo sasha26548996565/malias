@@ -7,37 +7,31 @@ namespace App\Http\Controllers\Main;
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
-use Barryvdh\Debugbar\Facades\Debugbar;
-use App\Http\Requests\Cart\StoreRequest;
 use Darryldecode\Cart\Facades\CartFacade;
 use App\Http\Requests\Main\Cart\ActionRequest;
+use App\Services\CartService;
 
 class CartController extends Controller
 {
+    public function __construct(private CartService $cartService)
+    {}
+
     public function index(): View
     {
-        $cart = CartFacade::session(session()->get('cartId'))->getContent();
-        return view('main.cart', compact('cart'));
+        $cart = CartFacade::session(session()->get('cartId'));
+        $products = $cart->getContent();
+        $totalPrice = $cart->getSubTotal();
+
+        return view('main.cart', compact('products', 'totalPrice'));
     }
 
-    public function add(StoreRequest $request, Product $product, int $quantity = 1): RedirectResponse
+    public function add(Product $product, int $quantity = 1): RedirectResponse
     {
         if (session('cartId') == null)
             session(['cartId' => uniqid()]);
 
-        CartFacade::session(session()->get('cartId'))->add([
-            'id' => $product->id,
-            'name' => $product->name,
-            'price' => $product->price,
-            'quantity' => $quantity,
-            'attributes' => [
-                'slug' => $product->slug,
-                'preview' => $product->preview,
-            ],
-        ]);
-
+        $this->cartService->add($product, session()->get('cartId'), $quantity);
         return to_route('cart.index');
     }
 
@@ -48,10 +42,15 @@ class CartController extends Controller
         switch ($params['action'])
         {
             case 'update':
-                $cart->update($product->id, ['quantity' => $params['quantity']]);
+                if ($product->checkAvailable((int) $params['quantity']))
+                    $this->cartService->update($product->id, $cart, (int) $params['quantity']);
+                else
+                    session()->flash('not_available', 'product not available in count'. $params['quantity']);
                 break;
             case 'remove':
-                $cart->remove($product->id);
+                $this->cartService->remove($product->id, $cart);
+                if ($cart->getContent()->count() <= 0)
+                    return to_route('index');
                 break;
         }
 

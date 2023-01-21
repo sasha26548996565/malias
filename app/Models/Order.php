@@ -23,14 +23,9 @@ class Order extends Model
         return $this->belongsToMany(Product::class, 'order_products', 'order_id', 'product_id')->withPivot('count');
     }
 
-    public function promoCode(): HasMany
+    public function promoCode(): BelongsTo
     {
-        return $this->hasMany(PromoCode::class, 'order_id', 'id');
-    }
-
-    public function currency(): BelongsTo
-    {
-        return $this->belongsTo(Currency::class, 'currency_id', 'id');
+        return $this->belongsTo(PromoCode::class, 'promo_code_id', 'id');
     }
 
     public function getPopularProducts(): Collection
