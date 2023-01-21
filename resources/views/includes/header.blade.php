@@ -36,7 +36,7 @@
                         <!-- End Language -->
                         <!-- Start Currency -->
                         <ul class="currency">
-                            <li><a href="#"><strong>$</strong> USD<i class="fa fa-caret-down left-5"></i></a>
+                            <li><a href="#"><strong>$</strong>{{ currency()->getUserCurrency() }}<i class="fa fa-caret-down left-5"></i></a>
                                 <ul>
                                     <li><a href="#">$ EUR</a></li>
                                     <li><a href="#">$ GBP</a></li>
@@ -159,10 +159,10 @@
                                             <span class="cart-title">shopping cart</span>
                                             @if ($cart != null)
                                                 <span class="cart-item">{{ $cart->getContent()->count() }} item(s)- </span>
-                                                <span class="top-cart-price">{{ $cart->getSubTotal() / 100 }}$</span>
+                                                <span class="top-cart-price">{{ currency($cart->getSubTotal() / 100, 'USD', currency()->getUserCurrency()) }}</span>
                                             @endif
                                         </span>
-                                    </a>
+                                    </a><span class="price">
                                     <div class="mini-cart-content">
                                         @if ($cart != null)
                                             @foreach ($cart->getContent() as $product)
@@ -179,7 +179,7 @@
                                                         </a>
                                                         <span>
                                                             <strong class="text-right">{{ $product->quantity }}</strong>
-                                                            <strong class="cart-price text-right">{{ $product->price / 100 }}$</strong>
+                                                            <strong class="cart-price text-right">{{ currency($product->price / 100, 'USD', currency()->getUserCurrency()) }}</strong>
                                                         </span>
                                                     </div>
                                                     <div class="pro-del">

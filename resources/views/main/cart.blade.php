@@ -73,8 +73,8 @@
                                                             </div>
                                                         </form>
                                                     </td>
-                                                    <td class="text-right">{{ $product->price / 100 }}$</td>
-                                                    <td class="text-right">{{ $product->getPriceSum() / 100 }}$</td>
+                                                    <td class="text-right">{{ currency($product->price / 100, 'USD', currency()->getUserCurrency()) }}</td>
+                                                    <td class="text-right">{{ currency($product->getPriceSum() / 100, 'USD', currency()->getUserCurrency()) }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -118,7 +118,7 @@
                                                     <td class="text-right">
                                                         <strong>Total:</strong>
                                                     </td>
-                                                    <td class="text-right">{{ $totalPrice / 100 }}$</td>
+                                                    <td class="text-right">{{ currency($totalPrice / 100, 'USD', currency()->getUserCurrency()) }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>

@@ -36,4 +36,9 @@ class CartService
     {
         $cart->remove($productId);
     }
+
+    public function clear(Cart $cart): void
+    {
+        $cart->clear();
+    }
 }

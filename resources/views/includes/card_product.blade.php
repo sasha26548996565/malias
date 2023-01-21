@@ -22,10 +22,10 @@
         <h5><a href="{{ route('product.show', $product->slug) }}">{{ $product->name }}</a></h5>
         <div class="price-box">
             @if ($product->issetDiscount())
-                <span class="price">{{ $product->getPriceWithDiscount() }}$</span>
-                <span class="old-price">{{ $product->price / 100 }}$</span>
+                <span class="price">{{ $product->getPriceWithDiscount() }}</span>
+                <span class="old-price">{{ currency($product->price / 100, 'USD', currency()->getUserCurrency()) }}</span>
             @else
-                <span class="price">{{ $product->price / 100 }}$</span>
+                <span class="price">{{ currency($product->price / 100, 'USD', currency()->getUserCurrency()) }}</span>
             @endif
         </div>
         <span class="rating">

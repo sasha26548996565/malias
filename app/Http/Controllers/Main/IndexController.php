@@ -14,8 +14,8 @@ class IndexController extends Controller
     public function __invoke(): View
     {
         $newestCategories = Category::latest()->take(3)->get();
-        $newestProducts = Product::latest()->take(10)->get();
-        $saleProducts = Product::sale()->latest()->take(10)->get();
+        $newestProducts = Product::with(['category', 'images'])->latest()->take(10)->get();
+        $saleProducts = Product::with(['category', 'images'])->sale()->latest()->take(10)->get();
         return view('main.index', compact('newestCategories', 'newestProducts', 'saleProducts'));
     }
 }

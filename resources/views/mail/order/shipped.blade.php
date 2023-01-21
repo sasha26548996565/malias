@@ -1,10 +1,13 @@
-<x-mail::message>
-you shipped order
+@component('mail::message')
+your order shipped, products:
+@foreach ($order->products as $product)
+    {{ $product->name }}
+@endforeach
 
-<x-mail::button :url="{{ route('main.index') }}">
-site
-</x-mail::button>
+@component('mail::button', ['url' => route('index')])
+info
+@endcomponent
 
 Thanks,<br>
 {{ config('app.name') }}
-</x-mail::message>
+@endcomponent

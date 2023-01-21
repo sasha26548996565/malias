@@ -30,32 +30,11 @@ class CheckoutController extends Controller
     public function confirm(CheckoutRequest $request): RedirectResponse
     {
         $user = Auth::user();
-        $cart = CartFacade::session(session()->get('cartId'));
-        $items = $cart->getContent();
         $order = Order::create(array_merge($request->validated(), [
             'first_name' => $user->name,
             'last_name' => $user->last_name,
             'email' => $user->email,
         ]));
-
-        $couponCondition = $cart->getCondition('coupon');
-        if ($couponCondition != null)
-        {
-            $order->promoCode()->associate($couponCondition->getAttributes('couponId')['couponId'])->save();
-        }
-
-        foreach ($items as $item)
-        {
-            $product = Product::findOrFail($item->associatedModel->id);
-            $order->products()->attach($product->id);
-            $pivotRow = $order->products()->where('product_id', $product->id)->first()->pivot;
-            $pivotRow->count = $item->quantity;
-            $pivotRow->update();
-            $product->count -= $item->quantity;
-            $product->update();
-        }
-
-        $cart->clear();
 
         event(new OrderShipped($order));
 

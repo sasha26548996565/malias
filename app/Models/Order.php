@@ -28,11 +28,6 @@ class Order extends Model
         return $this->belongsTo(PromoCode::class, 'promo_code_id', 'id');
     }
 
-    public function currency(): BelongsTo
-    {
-        return $this->belongsTo(Currency::class, 'currency_id', 'id');
-    }
-
     public function getPopularProducts(): Collection
     {
         $productsIds = Order::get()->map->products->flatten()->map->pivot->mapTogroups( function ($pivot) {

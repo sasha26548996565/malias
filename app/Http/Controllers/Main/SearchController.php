@@ -14,7 +14,7 @@ class SearchController extends Controller
     public function searchProduct(SearchRequest $request): View
     {
         $searchString = $request->validated()['search'];
-        $products = Product::where('name', 'LIKE', '%'. $searchString .'%')
+        $products = Product::with('category', 'images')->where('name', 'LIKE', '%'. $searchString .'%')
             ->orWhere('description', 'LIKE', '%'. $searchString .'%')->latest()->get();
         return view('main.search', compact('products'));
     }

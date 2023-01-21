@@ -12,7 +12,6 @@ return new class extends Migration
         Schema::create('shippings', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('price');
-            $table->foreignIdFor(Currency::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

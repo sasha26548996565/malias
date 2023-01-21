@@ -63,7 +63,7 @@
                                             <span>{{ $property->pivot->value }}</span><hr />
                                         @endforeach
                                     @endif
-                                    <span class="current-price">{{ $product->price / 100 }}$</span>
+                                    <span class="current-price">{{ currency($product->price / 100, 'USD', currency()->getUserCurrency()) }}</span>
                                     <span class="item-stock">Availability:
                                         @if ($product->isAvailable())
                                             <span class="text-stock">In Stock</span>
