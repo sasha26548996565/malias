@@ -202,7 +202,7 @@
                                             </span>
                                             <span class="cart-button-top">
                                                 <a href="{{ route('cart.index') }}">View cart</a>
-                                                <a href="checkout.html">Checkout</a>
+                                                <a href="{{ route('checkout.index') }}">Checkout</a>
                                             </span>
                                         </div>
                                     </div>
@@ -236,11 +236,6 @@
                                         @guest
                                             <li><a href="{{ route('register') }}">Create Account</a></li>
                                         @endguest
-                                        <li><a href="my-account.html">My Account</a></li>
-                                        <li><a href="product-details.html">Product details</a></li>
-                                        <li><a href="shop.html">Shop Grid View</a></li>
-                                        <li><a href="shop-list.html">Shop List View</a></li>
-                                        <li><a href="wishlist.html">Wish List</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="contact.html">Contact Us</a></li>
@@ -269,11 +264,6 @@
                                     <li><a href="checkout.html">Checkout</a></li>
                                     <li><a href="{{ route('register') }}">Create Account</a></li>
                                     <li><a href="{{ route('login') }}">Login</a></li>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="product-details.html">Product details</a></li>
-                                    <li><a href="shop.html">Shop Grid View</a></li>
-                                    <li><a href="shop-list.html">Shop List View</a></li>
-                                    <li><a href="wishlist.html">Wish List</a></li>
                                 </ul>
                             </li>
                             <li><a href="contact.html">Contact Us</a></li>

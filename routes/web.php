@@ -10,6 +10,7 @@ Route::namespace('Main')->middleware('location')->group(function () {
     Route::get('/search', 'SearchController@searchProduct')->name('search');
     Route::get('/product/{slug}', 'ProductController@show')->name('product.show');
     Route::post('/review/{product}', 'ReviewController@addReview')->name('review');
+    Route::get('/category/{slug}', 'CategoryController@show')->name('category.show');
 
     Route::name('cart.')->prefix('cart')->group(function () {
         Route::post('/add/{product}/{quantity?}', 'CartController@add')->name('add');
