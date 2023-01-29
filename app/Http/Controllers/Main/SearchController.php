@@ -7,15 +7,18 @@ namespace App\Http\Controllers\Main;
 use App\Models\Product;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use App\Http\Requests\Main\SearchRequest;
+use App\Repositories\Products\ProductRepositoryContract;
 
 class SearchController extends Controller
 {
+    public function __construct(private ProductRepositoryContract $productRepositoryContract)
+    {}
+
     public function searchProduct(SearchRequest $request): View
     {
-        $searchString = $request->validated()['search'];
-        $products = Product::with('category', 'images')->where('name', 'LIKE', '%'. $searchString .'%')
-            ->orWhere('description', 'LIKE', '%'. $searchString .'%')->latest()->get();
+        $products = $this->productRepositoryContract->search($request->validated()['search']);
         return view('main.search', compact('products'));
     }
 }

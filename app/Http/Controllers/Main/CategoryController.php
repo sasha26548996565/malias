@@ -14,8 +14,10 @@ class CategoryController extends Controller
 {
     public function show(string $slug, FilterRequest $request): View
     {
+        $filterParams = price_replace($request->validated()['price']);
+
         $category = Category::with('products')->where('slug', $slug)->first();
-        $products = Product::filter($request->validated())->where('category_id', $category->id)->paginate(1);
+        $products = Product::filter($filterParams)->where('category_id', $category->id)->paginate(1);
         return view('main.category', compact('category', 'products'));
     }
 }

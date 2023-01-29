@@ -6,20 +6,18 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use EloquentFilter\Filterable;
+use App\Models\Traits\Searchable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Mehradsadeghi\FilterQueryString\FilterQueryString;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Product extends Model
 {
-    use HasFactory, SoftDeletes, Filterable;
+    use HasFactory, SoftDeletes, Filterable, Searchable;
 
     protected $guarded = [];
 
@@ -48,14 +46,22 @@ class Product extends Model
         return $this->hasMany(Review::class, 'product_id', 'id');
     }
 
+    public function scopeSale(Builder $builder): Builder
+    {
+        return $builder->where('discount', '>=', 10);
+    }
+
     public function isSale(): bool
     {
         return $this->discount >= 10;
     }
 
-    public function scopeSale(Builder $builder): Builder
+    public function toSearchableArray(): array
     {
-        return $builder->where('discount', '>=', 10);
+        return [
+            'name' => $this->name,
+            'description' => $this->description,
+        ];
     }
 
     public function wasPublishedRecently(): bool

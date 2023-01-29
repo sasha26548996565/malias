@@ -36,11 +36,13 @@
                         <!-- End Language -->
                         <!-- Start Currency -->
                         <ul class="currency">
-                            <li><a href="#"><strong>$</strong>{{ currency()->getUserCurrency() }}<i class="fa fa-caret-down left-5"></i></a>
+                            <li><a href="#"><strong>{{ currency()->getCurrency(currency()->getUserCurrency())['symbol'] }}</strong>
+                                {{ currency()->getUserCurrency() }}<i class="fa fa-caret-down left-5"></i></a>
                                 <ul>
-                                    <li><a href="#">$ EUR</a></li>
-                                    <li><a href="#">$ GBP</a></li>
-                                    <li><a href="#">$ USD</a></li>
+                                    @foreach (currency()->getCurrencies() as $currency)
+                                        <li><a href="{{ route('swapCurrency', $currency['code']) }}">
+                                            {{ $currency['symbol'] . $currency['code'] }}</a></li>
+                                    @endforeach
                                 </ul>
                             </li>
                         </ul>
@@ -125,7 +127,7 @@
             <div class="row">
                 <div class="col-md-3 col-sm-12">
                     <div class="logo">
-                        <a href="{{ route('index') }}" title="Malias"><img src="img/logo.png" alt="Malias"></a>
+                        <a href="{{ route('index') }}" title="Malias"><img src="{{ asset('img/logo.png') }}" alt="Malias"></a>
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-12">

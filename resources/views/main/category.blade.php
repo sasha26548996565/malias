@@ -15,11 +15,13 @@
                         <h4 class="shop-price-title">Price</h4>
                         <div class="info_widget">
                             <form class="price_filter" method="GET">
+                                <div id="slider-range"></div>
                                 <div class="price_slider_amount">
-                                    <input type="number" name="price_from" min="1" max="100000" value="{{ $_GET['price_from'] ?? 0 }}"
+                                    {{-- <input type="number" name="price_from" min="1" max="100000" value="{{ $_GET['price_from'] ?? 0 }}"
                                         placeholder="price from" />
                                     <input type="number" name="price_to" min="1" max="100000" value="{{ $_GET['price_to'] ?? 0 }}"
-                                        placeholder="price to" />
+                                        placeholder="price to" /> --}}
+                                    <input type="text" id="amount" name="price"  placeholder="Add Your Price" />
                                     <input type="submit" value="Filter"/>
                                 </div>
                             </form>

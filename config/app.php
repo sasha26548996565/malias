@@ -203,6 +203,9 @@ return [
         Darryldecode\Cart\CartServiceProvider::class,
 
         EloquentFilter\ServiceProvider::class,
+
+        Laravel\Scout\ScoutServiceProvider::class,
+
     ],
 
     /*
