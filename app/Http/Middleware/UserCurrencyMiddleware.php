@@ -12,7 +12,6 @@ class UserCurrencyMiddleware
     {
         if (! $request->get('currency') && ! session()->get('currency'))
         {
-            Debugbar::info(32);
             $clientIP = $request->getClientIp();
             $localCurrency = geoip($clientIP)->getAttribute('currency');
             session()->put([

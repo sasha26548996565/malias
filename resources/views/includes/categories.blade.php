@@ -1,6 +1,6 @@
 @foreach ($categories->where('parent_id', $parentId) as $category)
     <li class="arrow-plus">
-        <a href="shop.html">{{ $category->name }}</a>
+        <a href="{{ route('category.show', $category->slug) }}">{{ $category->name }}</a>
         @if ($categories->where('parentId', $category->id) != null)
             <div class="cat-left-drop-menu">
                 <div class="cat-left-drop-menu-left">
@@ -12,7 +12,7 @@
                         <a class="menu-item-heading" href="#">{{ $relatedCategory->name }}</a>
                         <ul>
                             @foreach ($categories->where('parent_id', $relatedCategory->id) as $category)
-                                <li><a href="#">{{ $category->name }}</a></li>
+                                <li><a href="{{ route('category.show', $category->slug) }}">{{ $category->name }}</a></li>
                             @endforeach
                         </ul>
                     @endif

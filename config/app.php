@@ -200,8 +200,11 @@ return [
 
         Barryvdh\Debugbar\ServiceProvider::class,
 
-        Darryldecode\Cart\CartServiceProvider::class
+        Darryldecode\Cart\CartServiceProvider::class,
 
+        EloquentFilter\ServiceProvider::class,
+
+        Laravel\Scout\ScoutServiceProvider::class,
 
     ],
 

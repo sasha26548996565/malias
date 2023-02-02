@@ -8,8 +8,10 @@ Route::namespace('Main')->middleware('location')->group(function () {
     Route::post('/subscription', 'SubscriptionController@subscribe')->name('subscribe');
     Route::get('/locale', 'LocationController@swapLanguage')->name('swapLanguage');
     Route::get('/search', 'SearchController@searchProduct')->name('search');
-    Route::get('/product/{slug}', 'ProductController@show')->name('product.show');
+    Route::get('/product/show/{slug}', 'ProductController@show')->name('product.show');
     Route::post('/review/{product}', 'ReviewController@addReview')->name('review');
+    Route::get('/category/{slug}', 'CategoryController@show')->name('category.show');
+    Route::get('/currency/{code}', 'CurrencyController@swapCurrency')->name('swapCurrency');
 
     Route::name('cart.')->prefix('cart')->group(function () {
         Route::post('/add/{product}/{quantity?}', 'CartController@add')->name('add');
