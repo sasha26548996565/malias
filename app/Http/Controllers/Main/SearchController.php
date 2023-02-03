@@ -13,7 +13,6 @@ use App\Repositories\Products\ProductRepositoryContract;
 
 class SearchController extends Controller
 {
-
     public function searchProduct(SearchRequest $request): View
     {
         $products = Product::search($request->validated()['search'])->paginate(10);
