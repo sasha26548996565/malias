@@ -1,5 +1,5 @@
 <div class="single-product">
-    @if ($product->is_new)
+    @if ($product->wasPublishedRecently())
         <div class="label_new">
             <span class="new">new</span>
         </div>

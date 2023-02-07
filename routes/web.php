@@ -12,6 +12,7 @@ Route::namespace('Main')->middleware('location')->group(function () {
     Route::post('/review/{product}', 'ReviewController@addReview')->name('review');
     Route::get('/category/{slug}', 'CategoryController@show')->name('category.show');
     Route::get('/currency/{code}', 'CurrencyController@swapCurrency')->name('swapCurrency');
+    Route::post('/withlist/add/{product}', 'WithListController@add')->name('withlist.add');
 
     Route::name('cart.')->prefix('cart')->group(function () {
         Route::post('/add/{product}/{quantity?}', 'CartController@add')->name('add');

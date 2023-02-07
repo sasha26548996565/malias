@@ -23,16 +23,19 @@
             </form>
         @endif
         <div class="product-button-2">
-            <a href="#" data-toggle="tooltip"
-                title="Wishlist"><i
-                    class="fa fa-heart-o"></i></a>
-            <a href="#" data-toggle="tooltip"
-                title="Compare"><i
-                    class="fa fa-signal"></i></a>
-            <a href="#" class="modal-view"
-                data-toggle="modal"
-                data-target="#productModal"><i
-                    class="fa fa-search-plus"></i></a>
+            @auth
+                <form action="{{ route('withlist.add', $product->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" data-toggle="tooltip"
+                        title="Wishlist"><i
+                        @if (auth()->user()->hasLike($product->id))
+                            class="fa fa-heart"
+                        @else
+                            class="fa fa-heart-o"
+                        @endif
+                        ></i></button>
+                </form>
+            @endauth
         </div>
     </div>
 </div>

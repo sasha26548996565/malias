@@ -66,10 +66,7 @@ class Product extends Model
 
     public function wasPublishedRecently(): bool
     {
-        if ($this->is_new && Carbon::now()->gte($this->created_at->addDays(5)))
-            return true;
-
-        return false;
+        return Carbon::now()->lte($this->created_at->addDays(5));
     }
 
     public function disableIsNew(): void
