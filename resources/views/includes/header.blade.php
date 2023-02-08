@@ -59,7 +59,7 @@
                             {{-- make police --}}
                             <li><a href="{{ route('checkout.index') }}"><i class="fa fa-share"></i> Checkout</a></li>
                             @auth
-                                <li><a href="javascript:void" onclick="$('#logout-form').submit();">
+                                <li><a href="javascript:void" onclick="jQuery('#logout-form').submit();">
                                     <i class="fa fa-unlock-alt"></i> logout</a>
                                 </li>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
