@@ -65,9 +65,7 @@
                                     @endif
                                     <span class="current-price">{{ currency($product->price / 100, 'USD', currency()->getUserCurrency()) }}</span>
                                     <span class="item-stock">Availability:
-                                        @if ($product->isAvailable())
-                                            <span class="text-stock">In Stock</span>
-                                        @endif
+                                        <span class="text-stock">{{ $product->isAvailable() ? "In stock" : "not in stock" }}</span>
                                     </span>
                                 </div>
                                 <form action="{{ route('cart.add', $product->id) }}" method="POST" style="display: inline-block;">

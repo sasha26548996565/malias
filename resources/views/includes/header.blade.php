@@ -53,10 +53,18 @@
                     <div class="top-link">
                         <ul class="link">
                             <li><a href="my-account.html"><i class="fa fa-user"></i> My Account</a></li>
-                            <li><a href="wishlist.html"><i class="fa fa-heart"></i> Wish List (0)</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-share"></i> Checkout</a></li>
+                            <li><a href="{{ route('withlist.index') }}"><i class="fa fa-heart"></i> Wish List (
+                                {{ auth()->user()?->withlistProducts->count() ?? 0 }}
+                            )</a></li>
+                            {{-- make police --}}
+                            <li><a href="{{ route('checkout.index') }}"><i class="fa fa-share"></i> Checkout</a></li>
                             @auth
-                                <li><a href="{{ route('logout') }}"><i class="fa fa-unlock-alt"></i> logout</a></li>
+                                <li><a href="javascript:void" onclick="$('#logout-form').submit();">
+                                    <i class="fa fa-unlock-alt"></i> logout</a>
+                                </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             @else
                             <li><a href="{{ route('login') }}"><i class="fa fa-unlock-alt"></i> Login</a></li>
                             @endauth
