@@ -13,7 +13,7 @@ Route::namespace('Main')->middleware('location')->group(function () {
     Route::get('/category/{slug}', 'CategoryController@show')->name('category.show');
     Route::get('/currency/{code}', 'CurrencyController@swapCurrency')->name('swapCurrency');
 
-    Route::middleware('auth')->controller('WithlistController')->name('withlist.')->prefix('withlist')->group(function () {
+    Route::middleware('auth')->controller('WishlistController')->name('wishlist.')->prefix('wishlist')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/toggle-product/{product}', 'toggleProduct')->name('toggleProduct');
     });

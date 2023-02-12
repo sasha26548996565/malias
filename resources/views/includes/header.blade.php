@@ -53,8 +53,8 @@
                     <div class="top-link">
                         <ul class="link">
                             <li><a href="my-account.html"><i class="fa fa-user"></i> My Account</a></li>
-                            <li><a href="{{ route('withlist.index') }}"><i class="fa fa-heart"></i> Wish List (
-                                {{ auth()->user()?->withlistProducts->count() ?? 0 }}
+                            <li><a href="{{ route('wishlist.index') }}"><i class="fa fa-heart"></i> Wish List (
+                                {{ auth()->user()?->wishlistProducts->count() ?? 0 }}
                             )</a></li>
                             {{-- make police --}}
                             <li><a href="{{ route('checkout.index') }}"><i class="fa fa-share"></i> Checkout</a></li>

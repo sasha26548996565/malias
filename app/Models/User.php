@@ -30,13 +30,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function withlistProducts(): BelongsToMany
+    public function wishlistProducts(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class, 'withlist_product_user', 'user_id', 'product_id')->withTimestamps();
+        return $this->belongsToMany(Product::class, 'wishlist_product_user', 'user_id', 'product_id')->withTimestamps();
     }
 
     public function hasLike(int $productId): bool
     {
-        return $this->withlistProducts->contains($productId);
+        return $this->wishlistProducts->contains($productId);
     }
 }

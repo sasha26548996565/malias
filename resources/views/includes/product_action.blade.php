@@ -24,7 +24,7 @@
         @endif
         <div class="product-button-2">
             @auth
-                <form action="{{ route('withlist.toggleProduct', $product->id) }}" method="POST">
+                <form action="{{ route('wishlist.toggleProduct', $product->id) }}" method="POST">
                     @csrf
                     <button type="submit" data-toggle="tooltip"
                         title="Wishlist"><i
