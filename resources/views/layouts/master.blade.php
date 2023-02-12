@@ -6,10 +6,12 @@
         <title>@yield('title', __('index.title'))</title>
         <meta name="description" content="Shop">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
 
-       <link href='https://fonts.googleapis.com/css?family=Raleway:400,600' rel='stylesheet' type='text/css'>
-       <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Raleway:400,600' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
 
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
@@ -49,6 +51,7 @@
 		<script src="{{ asset('js/jquery.nivo.slider.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/plugins.js') }}"></script>
         <script src="{{ asset('js/main.js') }}"></script>
+        @include('includes.ajax.addCart')
 
         @yield('custom_javascript')
     </body>

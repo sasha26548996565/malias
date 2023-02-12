@@ -15,12 +15,9 @@
             }
         @endphp
         @if ($product->checkAvailable($quantity))
-            <form class="product-button" action="{{ route('cart.add', $product->id) }}" method="POST">
-                @csrf
-                <button type="submit"><i class="fa fa-shopping-cart"></i>Add to
-                    Cart
-                </button>
-            </form>
+            <div class="product-button">
+                <button class="add-cart" data-id="{{ $product->id }}"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+            </div>
         @endif
         <div class="product-button-2">
             @auth

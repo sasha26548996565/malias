@@ -68,47 +68,45 @@
                                         <span class="text-stock">{{ $product->isAvailable() ? "In stock" : "not in stock" }}</span>
                                     </span>
                                 </div>
-                                <form action="{{ route('cart.add', $product->id) }}" method="POST" style="display: inline-block;">
-                                    @csrf
-                                    <div class="about-product">
-                                        @foreach ($options as $option => $values)
-                                            <div class="product-select product-color">
-                                                <label><sup>*</sup>{{ $option }}</label>
-                                                <select name="" class="form-control">
-                                                    <option> --- Please Select --- </option>
-                                                    @foreach ($values as $value)
-                                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                    @php
-                                        $quantity = 1;
+                                <div class="about-product">
+                                    @foreach ($options as $option => $values)
+                                        <div class="product-select product-color">
+                                            <label><sup>*</sup>{{ $option }}</label>
+                                            <select name="" class="form-control">
+                                                <option> --- Please Select --- </option>
+                                                @foreach ($values as $value)
+                                                    <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                @php
+                                    $quantity = 1;
 
-                                        if (! is_null(session()->get('cartId')))
+                                    if (! is_null(session()->get('cartId')))
+                                    {
+                                        $cart = \Darryldecode\Cart\Facades\CartFacade::session(session()->get('cartId'))->getContent($product->id);
+                                        $productInCart = $cart->get($product->id);
+                                        if (! is_null($productInCart))
                                         {
-                                            $cart = \Darryldecode\Cart\Facades\CartFacade::session(session()->get('cartId'))->getContent($product->id);
-                                            $productInCart = $cart->get($product->id);
-                                            if (! is_null($productInCart))
-                                            {
-                                                $quantityProductInCart = $productInCart->quantity;
-                                                $quantity += $quantityProductInCart;
-                                                $edgeQuantity = $product->count - $productInCart->quantity;
-                                            }
+                                            $quantityProductInCart = $productInCart->quantity;
+                                            $quantity += $quantityProductInCart;
+                                            $edgeQuantity = $product->count - $productInCart->quantity;
                                         }
-                                    @endphp
-                                    <div class="product-quantity">
-                                        @if ($product->checkAvailable($quantity))
-                                            <span>Qty</span>
-                                            <input type="number" name="quantity" placeholder="1" min="1" max="{{ $edgeQuantity }}" />
-                                            <button type="submit" class="toch-button toch-add-cart">Add to Cart</button>
-                                        @endif
-                                        <button type="submit" class="toch-button toch-wishlist">wishlist</button>
-                                        <button type="submit" class="toch-button toch-compare">Compare</button>
-                                        <hr />
-                                    </div>
-                                </form>
+                                    }
+                                @endphp
+                                <div class="product-quantity">
+                                    @if ($product->checkAvailable($quantity))
+                                        <span>Qty</span>
+                                        <input type="number" name="quantity" class="quantity"
+                                            placeholder="1" min="1" max="{{ $edgeQuantity }}" />
+                                        <button type="submit" data-id="{{ $product->id }}" class="toch-button toch-add-cart add-cart">Add to Cart</button>
+                                    @endif
+                                    <button type="submit" class="toch-button toch-wishlist">wishlist</button>
+                                    <button type="submit" class="toch-button toch-compare">Compare</button>
+                                    <hr />
+                                </div>
                             </div>
                         </div>
                         <!-- Start Toch-Box -->

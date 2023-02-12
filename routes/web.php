@@ -19,7 +19,7 @@ Route::namespace('Main')->middleware('location')->group(function () {
     });
 
     Route::name('cart.')->prefix('cart')->group(function () {
-        Route::post('/add/{product}/{quantity?}', 'CartController@add')->name('add');
+        Route::post('/add/', 'CartController@add')->name('add');
 
         Route::middleware('cart_not_empty')->group(function () {
             Route::get('/', 'CartController@index')->name('index');

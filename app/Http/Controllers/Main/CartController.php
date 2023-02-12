@@ -5,12 +5,16 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Main;
 
 use App\Models\Product;
+use Illuminate\Http\Request;
+use App\Services\CartService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Darryldecode\Cart\Facades\CartFacade;
 use App\Http\Requests\Main\Cart\ActionRequest;
-use App\Services\CartService;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class CartController extends Controller
 {
@@ -26,13 +30,14 @@ class CartController extends Controller
         return view('main.cart', compact('products', 'totalPrice'));
     }
 
-    public function add(Product $product, int $quantity = 1): RedirectResponse
+    public function add(Request $request): JsonResponse
     {
         if (session('cartId') == null)
             session(['cartId' => uniqid()]);
 
-        $this->cartService->add($product, session()->get('cartId'), $quantity);
-        return to_route('cart.index');
+        $product = Product::findOrFail($request->input('productId'));
+        $cart = $this->cartService->add($product, session()->get('cartId'), (int) $request->input('quantity'));
+        return response()->json($cart);
     }
 
     public function action(ActionRequest $request, Product $product): RedirectResponse

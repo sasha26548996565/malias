@@ -11,9 +11,9 @@ use Darryldecode\Cart\Facades\CartFacade;
 
 class CartService
 {
-    public function add(Product $product, string $cartId, int $quantity): void
+    public function add(Product $product, string $cartId, int $quantity): Cart
     {
-        CartFacade::session($cartId)->add([
+        return CartFacade::session($cartId)->add([
             'id' => $product->id,
             'name' => $product->name,
             'price' => $product->price,
