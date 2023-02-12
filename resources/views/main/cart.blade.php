@@ -59,20 +59,21 @@
                                                         @if (session()->has('not_available'))
                                                             <div class="alert alert-danger">{{ session()->get('not_available') }}</div>
                                                         @endif
-                                                        <form action="{{ route('cart.action', $product->id) }}" class="btn-block cart-put" method="POST">
-                                                            @csrf
-                                                            <input class="form-control" type="number" name="quantity" min="1" max="{{ $product->attributes['count'] }}"
-                                                                placeholder="{{ $product->quantity }}" value="{{ $product->quantity }}" />
-                                                            <div class="input-group-btn cart-buttons">
-                                                                <button type="submit" name="action" value="update" class="btn btn-primary" data-toggle="tooltip" title="Update">
-                                                                    <i class="fa fa-refresh"></i>
+														<div class="btn-block cart-put">
+															<input class="form-control quantity" type="number" min="1" max="{{ $product->attributes['count'] }}"
+                                                                placeholder="{{ $product->quantity }}" />
+															<div class="input-group-btn cart-buttons">
+                                                                <button type="submit" value="update"
+                                                                        class="btn btn-primary" data-toggle="tooltip" title="Update">
+                                                                    <i data-id="{{ $product->id }}" class="fa fa-refresh update-cart"></i>
                                                                 </button>
-                                                                <button type="submit" name="action" value="remove" class="btn btn-danger" data-toggle="tooltip" title="Remove">
-                                                                    <i class="fa fa-times-circle"></i>
+                                                                <button type="submit" value="remove"
+                                                                        class="btn btn-danger" data-toggle="tooltip" title="Remove">
+                                                                    <i data-id="{{ $product->id }}" class="fa fa-times-circle remove-cart"></i>
                                                                 </button>
                                                             </div>
-                                                        </form>
-                                                    </td>
+														</div>
+													</td>
                                                     <td class="text-right">{{ currency($product->price / 100, 'USD', currency()->getUserCurrency()) }}</td>
                                                     <td class="text-right">{{ currency($product->getPriceSum() / 100, 'USD', currency()->getUserCurrency()) }}</td>
                                                 </tr>

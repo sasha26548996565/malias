@@ -20,10 +20,11 @@ Route::namespace('Main')->middleware('location')->group(function () {
 
     Route::name('cart.')->prefix('cart')->group(function () {
         Route::post('/add/', 'CartController@add')->name('add');
+        Route::post('/remove', 'CartController@remove')->name('remove');
 
         Route::middleware('cart_not_empty')->group(function () {
             Route::get('/', 'CartController@index')->name('index');
-            Route::post('/action/{product}', 'CartController@action')->name('action');
+            Route::post('/update', 'CartController@update')->name('update');
             Route::post('/set-coupon', 'CouponController@setCoupon')->name('setCoupon');
         });
     });

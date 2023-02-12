@@ -52,6 +52,8 @@
         <script src="{{ asset('js/plugins.js') }}"></script>
         <script src="{{ asset('js/main.js') }}"></script>
         @include('includes.ajax.addCart')
+        @include('includes.ajax.updateCart')
+        @include('includes.ajax.removeCart')
 
         @yield('custom_javascript')
     </body>

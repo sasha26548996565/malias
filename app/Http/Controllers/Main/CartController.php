@@ -30,7 +30,7 @@ class CartController extends Controller
         return view('main.cart', compact('products', 'totalPrice'));
     }
 
-    public function add(Request $request): JsonResponse
+    public function add(Request $request): JsonResponse|RedirectResponse
     {
         if (session('cartId') == null)
             session(['cartId' => uniqid()]);
@@ -40,25 +40,27 @@ class CartController extends Controller
         return response()->json($cart);
     }
 
-    public function action(ActionRequest $request, Product $product): RedirectResponse
+    public function update(Request $request): JsonResponse
     {
-        $params = $request->validated();
         $cart = CartFacade::session(session()->get('cartId'));
-        switch ($params['action'])
-        {
-            case 'update':
-                if ($product->checkAvailable((int) $params['quantity']))
-                    $this->cartService->update($product->id, $cart, (int) $params['quantity']);
-                else
-                    session()->flash('not_available', 'product not available in count'. $params['quantity']);
-                break;
-            case 'remove':
-                $this->cartService->remove($product->id, $cart);
-                if ($cart->getContent()->count() <= 0)
-                    return to_route('index');
-                break;
-        }
+        $product = Product::findOrFail($request->input('productId'));
+        $quantity = (int) $request->input('quantity');
 
-        return to_route('cart.index');
+        if ($product->checkAvailable($quantity))
+            $cart = $this->cartService->update($product->id, $cart, $quantity);
+        else
+            session()->flash('not_available', 'product not available in count'. $quantity);
+
+        return response()->json($cart);
+    }
+
+    public function remove(Request $request): JsonResponse|RedirectResponse
+    {
+        $cart = CartFacade::session(session()->get('cartId'));
+        $product = Product::findOrFail($request->input('productId'));
+
+        $countCart = $this->cartService->remove($product->id, $cart);
+
+        return response()->json(['status' => true, 'countCart' => $countCart]);
     }
 }
