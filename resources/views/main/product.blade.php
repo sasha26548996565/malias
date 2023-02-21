@@ -100,7 +100,7 @@
                                     @if ($product->checkAvailable($quantity))
                                         <span>Qty</span>
                                         <input type="number" name="quantity" class="quantity"
-                                            placeholder="1" min="1" max="{{ $edgeQuantity }}" />
+                                            placeholder="1" min="1" max="{{ $edgeQuantity ?? $product->count }}" />
                                         <button type="submit" data-id="{{ $product->id }}" class="toch-button toch-add-cart add-cart">Add to Cart</button>
                                     @endif
                                     <button type="submit" class="toch-button toch-wishlist">wishlist</button>

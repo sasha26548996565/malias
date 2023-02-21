@@ -21,6 +21,7 @@ class ProductFactory extends Factory
             'price' => random_int(100, 1000),
             'rate' => random_int(1, 5),
             'category_id' => Category::all()->random()->id,
+            'preview' => '/no_product.jfif',
         ];
     }
 }

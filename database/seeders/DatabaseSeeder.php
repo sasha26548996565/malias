@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RegionSeeder::class);
         $this->call(CountrySeeder::class);
         $this->call(ProductSeeder::class);
+        $this->call(ImageSeeder::class);
         $this->call(PropertySeeder::class);
         $this->call(LanguageSeeder::class);
     }
