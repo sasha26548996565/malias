@@ -1,19 +1,18 @@
 @extends('layouts.master')
 
-@section('title', 'category ' . $category->name)
-
-@section('custom_css')
-    <style rel="stylesheet" href="{{ asset('css/price_range.css') }}"></style>
-@endsection
-
-@section('custom_javascript')
-    <script src="{{ asset('js/price_range.js') }}"></script>
-    @include('includes.ajax.productFilter', ['categorySlug' => $category->slug])
-@endsection
+@section('title', 'new products')
 
 @section('content')
     <section class="page-content">
         <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="page-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li class="active"><a href="#">Special Offers</a></li>
+                    </ul>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-3">
                     <!-- shop-filter start -->
@@ -23,15 +22,12 @@
                         </div>
                         <h4 class="shop-price-title">Price</h4>
                         <div class="info_widget">
-                            <div class="price-slider"><span>from
-                                <input type="number" class="price-range priceFrom" name="priceFrom" value="5000" min="0" max="120000" /> to
-                                <input type="number" class="price-range priceTo" name="priceTo" value="50000" min="0" max="120000" /></span>
-                                <input value="25000" min="0" class="price-range"max="120000" step="500" type="range" />
-                                <input value="50000" min="0" class="price-range"max="120000" step="500" type="range" />
-                                <svg width="100%" height="24">
-                                    <line x1="4" y1="0" x2="300" y2="0" stroke="#212121"
-                                        stroke-width="12" stroke-dasharray="1 28"></line>
-                                </svg>
+                            <div class="price_filter">
+                                <div id="slider-range"></div>
+                                <div class="price_slider_amount">
+                                    <input type="text" id="amount" name="price"  placeholder="Add Your Price" />
+                                    <input type="submit"  value="Filter"/>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -98,18 +94,12 @@
                     <div class="product-area">
                         <div class="row">
                             <div class="col-xs-12">
-                                <!-- Start Product-Menu -->
-                                <div class="product-menu">
-                                    <div class="product-title">
-                                        <h3 class="title-group-3 gfont-1">{{ $category->name }}</h3>
-                                    </div>
-                                </div>
                                 <div class="product-filter">
                                     <ul role="tablist">
                                         <li role="presentation" class="list active">
                                             <a href="#display-1-1" role="tab" data-toggle="tab"></a>
                                         </li>
-                                        <li role="presentation" class="grid ">
+                                        <li role="presentation"  class="grid ">
                                             <a href="#display-1-2" role="tab" data-toggle="tab"></a>
                                         </li>
                                     </ul>
@@ -131,7 +121,7 @@
                                         <label>Show:</label>
                                         <select>
                                             <option value="#">8</option>
-                                            <option value="#">16</option>
+                                            <option value="#">16)</option>
                                             <option value="#">24</option>
                                             <option value="#">40</option>
                                             <option value="#">80</option>
@@ -176,5 +166,6 @@
                 </div>
             </div>
         </div>
+
     </section>
 @endsection

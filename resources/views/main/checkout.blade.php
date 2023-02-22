@@ -125,8 +125,7 @@
                                                                         @if (session()->has('not_available'))
                                                                             <div class="alert alert-danger">{{ session()->get('not_available') }}</div>
                                                                         @endif
-                                                                        <form action="{{ route('cart.action', $product->id) }}" class="btn-block cart-put" method="POST">
-                                                                            @csrf
+                                                                        <div class="btn-block cart-put">
                                                                             <input class="form-control" type="number" name="quantity" min="1" max="{{ $product->attributes['count'] }}"
                                                                                 placeholder="{{ $product->quantity }}" value="{{ $product->quantity }}" />
                                                                             <div class="input-group-btn cart-buttons">
@@ -137,7 +136,7 @@
                                                                                     <i class="fa fa-times-circle"></i>
                                                                                 </button>
                                                                             </div>
-                                                                        </form>
+                                                                        </div>
                                                                     </td>
                                                                     <td class="text-right">{{ currency($product->price / 100, 'USD', currency()->getUserCurrency()) }}</td>
                                                                     <td class="text-right">{{ currency($product->getPriceSum() / 100, 'USD', currency()->getUserCurrency()) }}</td>

@@ -4,8 +4,10 @@ if (! function_exists('price_replace'))
 {
     function price_replace(string $price)
     {
-        $filterParams['price_from'] = (int) substr(stristr($price, ' - ', true), 1);
-        $filterParams['price_to'] = (int) substr(stristr($price, '-'), 3);
+        $priceFrom = (int) substr(stristr($price, ' - ', true), 1);
+        $priceTo = (int) substr(stristr($price, '-'), 3);
+        $filterParams['priceFrom'] = substr(currency($priceFrom / 100, 'USD', currency()->getUserCurrency()), 1);
+        $filterParams['priceTo'] = currency($priceTo / 100, 'USD', currency()->getUserCurrency());
         return $filterParams;
     }
 }

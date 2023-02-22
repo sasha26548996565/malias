@@ -6,18 +6,20 @@ namespace App\Http\Controllers\Main;
 
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use App\Http\Requests\Main\FilterRequest;
 
 class CategoryController extends Controller
 {
-    public function show(string $slug, FilterRequest $request): View
+    public function show(Request $request, string $slug): View
     {
-        $filterParams = price_replace($request->validated()['price']);
-
         $category = Category::with('products')->where('slug', $slug)->first();
-        $products = Product::filter($filterParams)->where('category_id', $category->id)->paginate(1);
+        $products = Product::where('category_id', $category->id)->paginate(10);
+
         return view('main.category', compact('category', 'products'));
     }
 }

@@ -237,7 +237,7 @@
                                 <li><a href="{{ route('index') }}">Home</a></li>
                                 <li><a href="about.html">About Us</a></li>
                                 <li class="hot"><a href="shop.html">Bestseller Products</a></li>
-                                <li class="new"><a href="shop-list.html">New Products</a></li>
+                                <li class="new"><a href="{{ route('product.index') }}">New Products</a></li>
                                 <li><a href="shop.html">Special Products</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul>
@@ -248,7 +248,6 @@
                                         @endguest
                                     </ul>
                                 </li>
-                                <li><a href="contact.html">Contact Us</a></li>
                             </ul>
                         </nav>
                     </div>

@@ -10,6 +10,12 @@ use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
+    public function index(): View
+    {
+        $products = Product::latest()->paginate(10);
+        return view('main.products', compact('products'));
+    }
+
     public function show(string $slug): View
     {
         $product = Product::where('slug', $slug)->first()->load(['optionValues.option']);
