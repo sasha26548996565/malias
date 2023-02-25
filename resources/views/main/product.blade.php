@@ -84,7 +84,7 @@
                                 <div class="product-quantity">
                                     @if ($product->checkAvailable(count_product_in_cart(session()->get('cartId'), $product->id)))
                                         <span>Qty</span>
-                                        <input type="number" name="quantity" class="quantity"
+                                        <input type="number" name="quantity" class="quantityy"
                                             placeholder="1" min="1" max="{{ $product->count - count_product_in_cart(session()->get('cartId'), $product->id) }}" />
                                         <button type="submit" data-id="{{ $product->id }}" class="toch-button toch-add-cart update-cart">Add to Cart</button>
                                     @endif

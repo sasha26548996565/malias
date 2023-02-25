@@ -1,9 +1,9 @@
 <script>
     jQuery(document).ready(function () {
-        jQuery('.update-cart').click(function (event) {
+        jQuery('.update-quantity-cart').click(function (event) {
             event.preventDefault();
             let productId = jQuery(event.target).data('id');
-            let quantity = jQuery('.quantityy').val();
+            let quantity = jQuery('.quantity').val();
             alert(quantity);
 
             jQuery.ajax({
