@@ -2,8 +2,14 @@
     jQuery(document).ready(function () {
         jQuery('.update-cart').click(function (event) {
             event.preventDefault();
-            let productId = jQuery(event.target).data('id');
-            let quantity = jQuery('#quantity' + productId).val();
+            let
+                productId = jQuery(event.target).data('id'),
+                quantity = jQuery('#quantity' + productId).val();
+
+            if (quantity == "")
+            {
+                quantity = 1;
+            }
 
             jQuery.ajax({
                 url: "{{ route('cart.update') }}",
