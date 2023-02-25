@@ -9,8 +9,9 @@
                         <ul class="language">
                             <li>
                                 <a href="#">
-                                    <img class="right-5 currenctLanguageImage" src="img/flags/gb.png" alt="#">
-                                    <span class="currentLanguage">English</span>
+                                    <img class="right-5 currenctLanguageImage" src="{{ $currentLanguage->image }}" height="11" width="16"
+                                        alt="{{ $currentLanguage->slug }}">
+                                    <span class="currentLanguage">{{ $currentLanguage->slug }}</span>
                                     <i class="fa fa-caret-down left-5"></i>
                                 </a>
                                 <ul>
