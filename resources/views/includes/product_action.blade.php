@@ -1,20 +1,6 @@
 <div class="product-action">
     <div class="button-group">
-        @php
-            $quantity = 1;
-
-            if (! is_null(session()->get('cartId')))
-            {
-                $cart = \Darryldecode\Cart\Facades\CartFacade::session(session()->get('cartId'))->getContent($product->id);
-                $productInCart = $cart->get($product->id);
-                if (! is_null($productInCart))
-                {
-                    $quantityProductInCart = $productInCart->quantity;
-                    $quantity += $quantityProductInCart;
-                }
-            }
-        @endphp
-        @if ($product->checkAvailable($quantity))
+        @if ($product->checkAvailable(count_product_in_cart(session()->get('cartId'), $product->id)))
             <div class="product-button">
                 <button class="add-cart" data-id="{{ $product->id }}"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
             </div>

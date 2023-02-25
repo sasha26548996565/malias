@@ -11,7 +11,10 @@ class LocationMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        App::setLocale(session()->get('locale') ?? config('app.locale'));
+        if (is_null(session()->get('locale')))
+            session(['locale' => config('app.locale')]);
+
+        App::setLocale(session()->get('locale'));
         return $next($request);
     }
 }
