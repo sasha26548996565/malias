@@ -54,6 +54,7 @@
         @include('includes.ajax.addCart')
         @include('includes.ajax.updateCart')
         @include('includes.ajax.removeCart')
+        @include('includes.ajax.swopeLanguage')
 
         @yield('custom_javascript')
     </body>

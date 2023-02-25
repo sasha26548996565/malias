@@ -1,21 +1,3 @@
-@section('custom_javascript')
-    <script>
-        jQuery(document).ready(function () {
-            jQuery('.language-select').click(function (event) {
-                let language = jQuery(this).text();
-
-                jQuery.ajax({
-                    url: "{{ route('swapLanguage') }}",
-                    method: "GET",
-                    data: {
-                        "locale": language,
-                    }
-                });
-            });
-        });
-    </script>
-@endsection
-
 <header class="header-area">
     <!-- HEADER-TOP START -->
     <div class="header-top hidden-xs">
@@ -235,14 +217,14 @@
                         <nav>
                             <ul>
                                 <li><a href="{{ route('index') }}">Home</a></li>
-                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="{{ route('about') }}">About Us</a></li>
                                 <li class="hot"><a href="shop.html">Bestseller Products</a></li>
                                 <li class="new"><a href="{{ route('product.index') }}">New Products</a></li>
                                 <li><a href="shop.html">Special Products</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul>
                                         <li><a href="{{ route('cart.index') }}">Cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
+                                        <li><a href="{{ route('checkout.index') }}">Checkout</a></li>
                                         @guest
                                             <li><a href="{{ route('register') }}">Create Account</a></li>
                                         @endguest
@@ -264,13 +246,13 @@
                     <nav id="mobile-menu">
                         <ul>
                             <li><a href="{{ route('index') }}">Home</a></li>
-                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="{{ route('about') }}">About Us</a></li>
                             <li><a href="shop.html">Bestseller Products</a></li>
                             <li><a href="shop-list.html">New Products</a></li>
                             <li><a href="#">Pages</a>
                                 <ul>
                                     <li><a href="{{ route('cart.index') }}">Cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
+                                    <li><a href="{{ route('checkout.index') }}">Checkout</a></li>
                                     <li><a href="{{ route('register') }}">Create Account</a></li>
                                     <li><a href="{{ route('login') }}">Login</a></li>
                                 </ul>
