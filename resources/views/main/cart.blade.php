@@ -59,7 +59,7 @@
                                                             <div class="alert alert-danger">{{ session()->get('not_available') }}</div>
                                                         @endif
 														<div class="btn-block cart-put">
-															<input class="quantityy form-control" type="number" min="1" max="{{ $product->attributes['count'] }}"
+															<input class="quantity form-control" id="quantity" type="number" min="1" max="{{ $product->attributes['count'] }}"
                                                                 placeholder="{{ $product->quantity }}" />
 															<div class="input-group-btn cart-buttons">
                                                                 <button type="submit" value="update"

@@ -86,7 +86,7 @@
                                         <span>Qty</span>
                                         <input type="number" name="quantity" class="quantityy"
                                             placeholder="1" min="1" max="{{ $product->count - count_product_in_cart(session()->get('cartId'), $product->id) }}" />
-                                        <button type="submit" data-id="{{ $product->id }}" class="toch-button toch-add-cart update-cart">Add to Cart</button>
+                                        <button type="submit" data-id="{{ $product->id }}" class="toch-button toch-add-cart add-cart">Add to Cart</button>
                                     @endif
                                     <button type="submit" class="toch-button toch-wishlist">wishlist</button>
                                     <button type="submit" class="toch-button toch-compare">Compare</button>
