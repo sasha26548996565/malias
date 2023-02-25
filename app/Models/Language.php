@@ -11,9 +11,10 @@ class Language extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
     private array $properties = [
-        ['slug' => 'ru'],
-        ['slug' => 'en'],
+        ['slug' => 'ru', 'image' => 'img/flags/ru.jpg'],
+        ['slug' => 'en', 'image' => 'img/flags/gb.png'],
     ];
 
     public function getProperties(): array
@@ -21,5 +22,4 @@ class Language extends Model
         return $this->properties;
     }
 
-    protected $guarded = [];
 }

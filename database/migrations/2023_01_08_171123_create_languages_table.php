@@ -10,9 +10,8 @@ return new class extends Migration
     {
         Schema::create('languages', function (Blueprint $table) {
             $table->id();
-
             $table->string('slug')->unique();
-
+            $table->string('image');
             $table->timestamps();
         });
     }

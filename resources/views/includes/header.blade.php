@@ -7,10 +7,16 @@
                     <div class="top-menu">
                         <!-- Start Language -->
                         <ul class="language">
-                            <li><a href="#"><img class="right-5" src="img/flags/gb.png" alt="#">English<i class="fa fa-caret-down left-5"></i></a>
+                            <li>
+                                <a href="#">
+                                    <img class="right-5 currenctLanguageImage" src="img/flags/gb.png" alt="#">
+                                    <span class="currentLanguage">English</span>
+                                    <i class="fa fa-caret-down left-5"></i>
+                                </a>
                                 <ul>
                                     @foreach ($languages as $language)
-                                        <li><a href="#" class="language-select"><img class="right-5" src="img/flags/fr.png" alt="#">{{ $language->slug }}</a></li>\
+                                        <li><a href="#" class="language-select"><img class="right-5" src="{{ $language->image }}"
+                                            height="11" width="16" alt="{{ $language->slug }}">{{ $language->slug }}</a></li>\
                                     @endforeach
                                 </ul>
                             </li>
