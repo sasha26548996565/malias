@@ -17,6 +17,11 @@ return new class extends Migration
             $table->foreignId('region_id')->nullable()->constrained()->onDelete('CASCADE');
             $table->foreignId('country_id')->nullable()->constrained()->onDelete('CASCADE');
             $table->foreignId('promo_code_id')->nullable()->nullable()->constrained()->onDelete('CASCADE');
+            $table->boolean('status')->default(false);
+            $table->string('address')->nullable();
+            $table->string('address_2')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

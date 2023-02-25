@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained()->onDelete('CASCADE');
             $table->foreignId('product_id')->constrained()->onDelete('CASCADE');
+            $table->unsignedInteger('count')->default(1);
             $table->timestamps();
         });
     }
