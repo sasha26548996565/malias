@@ -75,14 +75,14 @@ class Product extends Model
         $this->save();
     }
 
-    public function getPriceWithDiscount(): float
+    public function getPriceWithDiscount(): string
     {
         if ($this->discount == null)
-            return $this->price / 100;
+            return currency($this->price / 100, 'USD', currency()->getUserCurrency());
 
-        $totalPriceInCent = $this->price * (100 - $this->discount) / 100;
-        $totalPriceInWhole = $totalPriceInCent / 100;
-        return $totalPriceInWhole;
+        $price = currency($this->price / 100, 'USD', currency()->getUserCurrency(), false) * (100 - $this->discount) / 100;
+        $totalPrice = currency($price, 'USD', currency()->getUserCurrency());
+        return $totalPrice;
     }
 
     public function issetDiscount(): bool

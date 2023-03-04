@@ -12,7 +12,7 @@
                     <div class="col-md-12">
                         <ul class="page-menu">
                             <li><a href="{{ route('index') }}">Home</a></li>
-                            <li class="active"><a href="account.html">Account</a></li>
+                            <li class="active"><a href="{{ route('register') }}">Account</a></li>
                         </ul>
                     </div>
                 </div>
