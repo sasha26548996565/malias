@@ -28,7 +28,7 @@ class CategoryController extends Controller
                         'priceTo' => currency($request->priceTo * 100, 'USD', currency()->getUserCurrency(), false),
                     ])
                 ]);
-            $products = Product::filter($filter)->paginate(10);
+            $products = Product::where('category_id', $category->id)->filter($filter)->paginate(10);
             return view('includes.ajax.card_product', compact('products'));
         }
 
