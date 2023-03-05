@@ -7,12 +7,9 @@ namespace App\Http\Controllers\Main;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use App\Http\Filters\ProductFilter;
 use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
-use Barryvdh\Debugbar\Facades\Debugbar;
-use App\Http\Requests\Main\FilterRequest;
 
 class CategoryController extends Controller
 {
