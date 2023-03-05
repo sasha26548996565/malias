@@ -33,6 +33,5 @@ class CategoryController extends Controller
         }
 
         return view('main.category', compact('category', 'products'));
-
     }
 }
