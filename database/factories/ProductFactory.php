@@ -18,7 +18,7 @@ class ProductFactory extends Factory
             'name' => $this->faker->word,
             'slug' => $this->faker->unique->word . now()->format('YmdHis'),
             'description' => $this->faker->sentence,
-            'price' => random_int(100, 1000),
+            'price' => random_int(100000, 1000000),
             'rate' => random_int(1, 5),
             'category_id' => Category::all()->random()->id,
             'preview' => '/no_product.jfif',

@@ -6,7 +6,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Laravel\Scout\Searchable;
-use EloquentFilter\Filterable;
+use App\Models\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Database\Eloquent\Builder;

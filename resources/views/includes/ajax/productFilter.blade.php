@@ -22,10 +22,9 @@
                 data: {
                     priceFrom: priceFrom,
                     priceTo: priceTo,
-                    categorySlug: "{{ $categorySlug }}",
                 },
-                success: function () {
-                    window.location.reload();
+                success: function (data) {
+                    jQuery('.listview').html(data);
                 }
             });
         }
