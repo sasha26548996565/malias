@@ -22,7 +22,6 @@ class CategoryController extends Controller
         $products = Product::with('category')->where('category_id', $category->id)->latest()->paginate(10);
         if ($request->ajax())
         {
-            Debugbar::info(currency($request->priceFrom / 100, 'USD', currency()->getUserCurrency(), false));
             $filter = app()->make(ProductFilter::class, ['queryParams' =>
                 array_filter([
                         'priceFrom' => currency($request->priceFrom * 100, 'USD', currency()->getUserCurrency(), false),
