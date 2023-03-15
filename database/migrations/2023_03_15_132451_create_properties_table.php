@@ -8,16 +8,16 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('option_values', function (Blueprint $table) {
+        Schema::create('properties', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('option_id')->constrained()->onDelete('CASCADE');
             $table->string('name');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('option_values');
+        Schema::dropIfExists('properties');
     }
 };

@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class OptionValue extends Model
+class PropertyOption extends Model
 {
     use HasFactory;
 
-    public function option(): BelongsTo
+    public function properties(): BelongsTo
     {
-        return $this->belongsTo(Option::class, 'option_id', 'id');
+        return $this->belongsTo(Property::class, 'property_id', 'id');
     }
 }

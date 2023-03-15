@@ -59,8 +59,10 @@
                                     <hr />
                                     @if ($product->properties->count() > 0)
                                         @foreach ($product->properties as $property)
-                                            <span>{{ $property->name }}</span> -
-                                            <span>{{ $property->pivot->value }}</span><hr />
+                                            @foreach ($property->propertyOption as $propertyOption)
+                                                <span>{{ $property->name }}</span> -
+                                                <span>{{ $propertyOption->name }}</span><hr />
+                                            @endforeach
                                         @endforeach
                                     @endif
                                     <span class="current-price">{{ currency($product->price / 100, 'USD', currency()->getUserCurrency()) }}</span>
@@ -69,17 +71,7 @@
                                     </span>
                                 </div>
                                 <div class="about-product">
-                                    @foreach ($options as $option => $values)
-                                        <div class="product-select product-color">
-                                            <label><sup>*</sup>{{ $option }}</label>
-                                            <select name="" class="form-control">
-                                                <option> --- Please Select --- </option>
-                                                @foreach ($values as $value)
-                                                    <option value="{{ $value->id }}">{{ $value->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    @endforeach
+
                                 </div>
                                 <div class="product-quantity">
                                     @if ($product->checkAvailable(count_product_in_cart(session()->get('cartId'), $product->id)))

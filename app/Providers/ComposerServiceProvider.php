@@ -12,6 +12,7 @@ use App\ViewComposers\LanguageComposer;
 use Illuminate\Support\ServiceProvider;
 use App\ViewComposers\HotDealProductComposer;
 use App\ViewComposers\PopularProductComposer;
+use App\ViewComposers\PropertiesComposer;
 use App\ViewComposers\RecentProductsComposer;
 
 class ComposerServiceProvider extends ServiceProvider
@@ -27,5 +28,6 @@ class ComposerServiceProvider extends ServiceProvider
         View::composer('includes.recent_products', RecentProductsComposer::class);
         View::composer('includes.header', CartComposer::class);
         View::composer('includes.header', CurrentLanguageComposer::class);
+        View::composer('main.category', PropertiesComposer::class);
     }
 }

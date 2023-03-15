@@ -18,12 +18,12 @@ class ProductController extends Controller
 
     public function show(string $slug): View
     {
-        $product = Product::where('slug', $slug)->first()->load(['optionValues.option']);
+        $product = Product::where('slug', $slug)->first();
         $relatedProducts = Product::where('category_id', $product->category->id)->latest()->get();
 
-        $options = $product->optionValues->mapToGroups(function ($item) {
-            return [$item->option->title => $item];
-        });
-        return view('main.product', compact('product', 'relatedProducts', 'options'));
+        // $options = $product->optionValues->mapToGroups(function ($item) {
+        //     return [$item->option->title => $item];
+        // });
+        return view('main.product', compact('product', 'relatedProducts'));
     }
 }

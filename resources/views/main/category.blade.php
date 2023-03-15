@@ -38,47 +38,18 @@
                     <!-- shop-filter start -->
                     <!-- filter-by start -->
                     <div class="accordion_one">
-                        <h4><a class="accordion-trigger" data-toggle="collapse" href="#divone">Color</a></h4>
-                        <div id="divone" class="collapse in">
-                            <div class="filter-menu">
-                                <ul>
-                                    <li><a href="#">Black (2)</a></li>
-                                    <li><a href="#">Blue (2)</a></li>
-                                    <li><a href="#">Brown (3)</a></li>
-                                    <li><a href="#">Green (3)</a></li>
-                                    <li><a href="#">Orange (2)</a></li>
-                                    <li><a href="#">Pink (2)</a></li>
-                                    <li><a href="#">Red (11)</a></li>
-                                    <li><a href="#">Yellow (3)</a></li>
-                                </ul>
+                        @foreach ($properties as $property)
+                            <h4><a class="accordion-trigger" data-toggle="collapse" href="#divone">{{ $property->name }}</a></h4>
+                            <div id="divone" class="collapse in">
+                                <div class="filter-menu">
+                                    <ul>
+                                        @foreach ($property->propertyOption as $option)
+                                            <li><a href="#">{{ $option->name }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <h4><a class="accordion-trigger" data-toggle="collapse" href="#div2">manufacture</a></h4>
-                        <div id="div2" class="collapse in">
-                            <div class="filter-menu">
-                                <ul>
-                                    <li><a href="#">Chanel (2)</a></li>
-                                    <li><a href="#">Christian Dior (2)</a></li>
-                                    <li><a href="#">Ermenegildo Zegna (2)</a></li>
-                                    <li><a href="#">Ferragamo (1)</a></li>
-                                    <li><a href="#">Hermes (2)</a></li>
-                                    <li><a href="#">Louis Vuitton (3)</a></li>
-                                    <li><a href="#">Prada (1)</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <h4><a class="accordion-trigger" data-toggle="collapse" href="#div3">Size</a></h4>
-                        <div id="div3" class="collapse in">
-                            <div class="filter-menu">
-                                <ul>
-                                    <li><a href="#">L (1)</a></li>
-                                    <li><a href="#">M (5)</a></li>
-                                    <li><a href="#">S (7)</a></li>
-                                    <li><a href="#">XL (5)</a></li>
-                                    <li><a href="#">XXL (6)</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <!-- filter-by end -->
                 </div>
