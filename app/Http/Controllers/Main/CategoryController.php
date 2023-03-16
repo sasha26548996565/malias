@@ -24,7 +24,8 @@ class CategoryController extends Controller
                 array_filter([
                         'priceFrom' => currency($request->priceFrom * 100, 'USD', currency()->getUserCurrency(), false),
                         'priceTo' => currency($request->priceTo * 100, 'USD', currency()->getUserCurrency(), false),
-                        'properties' => $request->property
+                        'properties' => $request->property,
+                        'sort' => $request->sort,
                     ])
                 ]);
             $products = Product::where('category_id', $category->id)->filter($filter)->paginate(10);

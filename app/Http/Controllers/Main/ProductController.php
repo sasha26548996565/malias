@@ -20,10 +20,6 @@ class ProductController extends Controller
     {
         $product = Product::where('slug', $slug)->first();
         $relatedProducts = Product::where('category_id', $product->category->id)->latest()->get();
-
-        // $options = $product->optionValues->mapToGroups(function ($item) {
-        //     return [$item->option->title => $item];
-        // });
         return view('main.product', compact('product', 'relatedProducts'));
     }
 }

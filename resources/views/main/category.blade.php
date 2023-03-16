@@ -86,16 +86,13 @@
                                     </ul>
                                     <div class="sort">
                                         <label>Sort By:</label>
-                                        <select>
-                                            <option value="#">Default</option>
-                                            <option value="#">Name (A - Z)</option>
-                                            <option value="#">Name (Z - A)</option>
-                                            <option value="#">Price (Low > High)</option>
-                                            <option value="#">Rating (Highest)</option>
-                                            <option value="#">Rating (Lowest)</option>
-                                            <option value="#">Name (A - Z)</option>
-                                            <option value="#">Model (Z - A))</option>
-                                            <option value="#">Model (A - Z)</option>
+                                        <select class="sortBy">
+                                            <option value="null">Default</option>
+                                            <option value="name">Name (A - Z)</option>
+                                            <option value="nameR">Name (Z - A)</option>
+                                            <option value="price">Price (Low > High)</option>
+                                            <option value="rate">Rating (Highest)</option>
+                                            <option value="rateR">Rating (Lowest)</option>
                                         </select>
                                     </div>
                                     <div class="limit">

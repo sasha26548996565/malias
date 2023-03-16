@@ -12,6 +12,7 @@ class ProductFilter extends AbstractFilter
     private const PRICE_FROM = 'priceFrom';
     private const PRICE_TO = 'priceTo';
     private const PROPERTIES = 'properties';
+    private const SORT = 'sort';
 
     public function getCallbacks(): array
     {
@@ -19,6 +20,7 @@ class ProductFilter extends AbstractFilter
             self::PRICE_FROM => [$this, 'priceFrom'],
             self::PRICE_TO => [$this, 'priceTo'],
             self::PROPERTIES => [$this, 'properties'],
+            self::SORT => [$this, 'sort'],
         ];
     }
 
@@ -37,5 +39,19 @@ class ProductFilter extends AbstractFilter
         $builder->whereHas('propertyOption', function(Builder $builder) use ($value) {
             $builder->where('name', $value);
         });
+    }
+
+    public function sort(Builder $builder, $value): void
+    {
+        if ($value == 'name')
+            $builder->orderBy('name');
+        else if ($value == 'nameR')
+            $builder->orderBy('name', 'DESC');
+        else if ($value == 'price')
+            $builder->orderBy('price');
+        else if ($value == 'rate')
+            $builder->orderBy('rate', 'DESC');
+        else if ($value == 'rateR')
+            $builder->orderBy('rate', 'DESC');
     }
 }
