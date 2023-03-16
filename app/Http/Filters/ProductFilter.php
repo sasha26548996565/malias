@@ -13,6 +13,8 @@ class ProductFilter extends AbstractFilter
     private const PRICE_TO = 'priceTo';
     private const PROPERTIES = 'properties';
     private const SORT = 'sort';
+    private const ALLOWED_SORTS = ['name', 'price', 'rate'];
+    private const ALLOWED_SORT_METHOD = ['asc', 'desc'];
 
     public function getCallbacks(): array
     {
@@ -43,15 +45,8 @@ class ProductFilter extends AbstractFilter
 
     public function sort(Builder $builder, $value): void
     {
-        if ($value == 'name')
-            $builder->orderBy('name');
-        else if ($value == 'nameR')
-            $builder->orderBy('name', 'DESC');
-        else if ($value == 'price')
-            $builder->orderBy('price');
-        else if ($value == 'rate')
-            $builder->orderBy('rate', 'DESC');
-        else if ($value == 'rateR')
-            $builder->orderBy('rate', 'DESC');
+        $sort = explode('|', $value);
+        $builder->orderBy(in_array($sort[0], self::ALLOWED_SORTS) ? $sort[0] : 'name',
+            in_array($sort[1], self::ALLOWED_SORT_METHOD) ? $sort[1] : 'asc');
     }
 }
