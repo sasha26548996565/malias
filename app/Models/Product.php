@@ -31,9 +31,9 @@ class Product extends Model
         return $this->belongsToMany(Property::class, 'property_products', 'product_id', 'property_id');
     }
 
-    public function propertryOption(): BelongsToMany
+    public function propertyOption(): BelongsToMany
     {
-        return $this->belongsToMany(PropertyOption::class, 'product_property_option', 'property_id', 'option_id');
+        return $this->belongsToMany(PropertyOption::class, 'product_property_option', 'product_id', 'property_option_id');
     }
 
     public function images(): HasMany

@@ -34,7 +34,8 @@ class ProductFilter extends AbstractFilter
 
     public function properties(Builder $builder, $value): void
     {
-        Debugbar::info($value);
-        //$builder->whereHas();
+        $builder->whereHas('propertyOption', function(Builder $builder) use ($value) {
+            $builder->where('name', $value);
+        });
     }
 }

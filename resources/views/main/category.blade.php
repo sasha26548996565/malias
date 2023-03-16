@@ -44,7 +44,7 @@
                                 <div class="filter-menu">
                                     <ul>
                                         @foreach ($property->propertyOption as $option)
-                                            <li><a href="#">{{ $option->name }}</a></li>
+                                            <li><a data-name="{{ $property->name }}" class="property" data-value="{{ $option->slug }}" href="#">{{ $option->name }}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>
