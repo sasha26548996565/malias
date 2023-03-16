@@ -12,7 +12,7 @@ class PropertyOption extends Model
 {
     use HasFactory;
 
-    public function properties(): BelongsTo
+    public function property(): BelongsTo
     {
         return $this->belongsTo(Property::class, 'property_id', 'id');
     }

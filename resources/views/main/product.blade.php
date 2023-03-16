@@ -58,11 +58,9 @@
                                     <p class="short-description">{{ $product->description }}</p>
                                     <hr />
                                     @if ($product->properties->count() > 0)
-                                        @foreach ($product->properties as $property)
-                                            @foreach ($property->propertyOption as $propertyOption)
-                                                <span>{{ $property->name }}</span> -
-                                                <span>{{ $propertyOption->name }}</span><hr />
-                                            @endforeach
+                                        @foreach ($product->propertyOption as $propertyOption)
+                                            <span>{{ $propertyOption->property->name }}</span> -
+                                            <span>{{ $propertyOption->name }}</span><hr />
                                         @endforeach
                                     @endif
                                     <span class="current-price">{{ currency($product->price / 100, 'USD', currency()->getUserCurrency()) }}</span>
