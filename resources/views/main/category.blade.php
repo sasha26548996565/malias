@@ -96,17 +96,6 @@
                                             <option value="rate|desc">Rating (Lowest)</option>
                                         </select>
                                     </div>
-                                    <div class="limit">
-                                        <label>Show:</label>
-                                        <select>
-                                            <option value="#">8</option>
-                                            <option value="#">16</option>
-                                            <option value="#">24</option>
-                                            <option value="#">40</option>
-                                            <option value="#">80</option>
-                                            <option value="#">100</option>
-                                        </select>
-                                    </div>
                                 </div>
 
                                 <!-- End Product-Menu -->

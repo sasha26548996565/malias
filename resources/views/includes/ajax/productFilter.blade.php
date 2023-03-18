@@ -20,7 +20,6 @@
             filter(priceFrom.val(), priceTo.val(), value, null);
         });
 
-
         priceFrom.change(function(event) {
             event.preventDefault();
             filter(priceFrom.val(), priceTo.val());

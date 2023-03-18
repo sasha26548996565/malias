@@ -41,7 +41,6 @@
                     <!-- Start Top-Link -->
                     <div class="top-link">
                         <ul class="link">
-                            <li><a href="my-account.html"><i class="fa fa-user"></i> My Account</a></li>
                             <li><a href="{{ route('wishlist.index') }}"><i class="fa fa-heart"></i> Wish List (
                                 {{ auth()->user()?->wishlistProducts->count() ?? 0 }}
                             )</a></li>
@@ -55,7 +54,7 @@
                                     @csrf
                                 </form>
                             @else
-                            <li><a href="{{ route('login') }}"><i class="fa fa-unlock-alt"></i> Login</a></li>
+                                <li><a href="{{ route('login') }}"><i class="fa fa-unlock-alt"></i> Login</a></li>
                             @endauth
                         </ul>
                     </div>
@@ -225,9 +224,7 @@
                             <ul>
                                 <li><a href="{{ route('index') }}">Home</a></li>
                                 <li><a href="{{ route('about') }}">About Us</a></li>
-                                <li class="hot"><a href="shop.html">Bestseller Products</a></li>
                                 <li class="new"><a href="{{ route('product.index') }}">New Products</a></li>
-                                <li><a href="shop.html">Special Products</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul>
                                         <li><a href="{{ route('cart.index') }}">Cart</a></li>
